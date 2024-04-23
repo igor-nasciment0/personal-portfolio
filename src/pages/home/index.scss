@@ -1,54 +1,103 @@
 .home {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-
+    flex-direction: row;
     justify-content: center;
 
-    gap: 80px;
+    padding: 80px 20px;
 
-    > div {
+    position: relative;
+    z-index: 2;
+
+    background: url("/public/assets/images/blurs.png");
+    background-repeat: no-repeat;
+    background-position: center right;
+
+    .background {
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        z-index: -1;
+
+        position: absolute;
+
+        background: url("/public/assets/images/tech-particles.gif");
+        background-size: 100%;
+        opacity: 0.1;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: min-content;
+        gap: 100px;
+    }
+
+    .text {
         display: flex;
         flex-direction: column;
-        text-align: center;
-        color: #E5E9F0;
+        gap: 80px;
 
-        p {
-            font-size: 18px;
-            font-weight: 500;
-        }
+        div {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            color: #E5E9F0;
 
-        h1 {
-            font-size: 62px;
-            font-weight: 400;
-        }
+            p {
+                font-size: 18px;
+                font-weight: 500;
+            }
 
-        h2 {
-            font-size: 32px;
-            color: #4D5BCE;
-        }
+            h1 {
+                font-size: 62px;
+                font-weight: 400;
+            }
 
-        .comment {
-            font-size: 16px;
-            color: var(--light-blue);
-            margin-bottom: 10px;
-        }
-
-        .variable {
-            font-size: 16px;
-            font-weight: 500;
-
-            .const {
+            h2 {
+                font-size: 32px;
                 color: #4D5BCE;
             }
 
-            .name {
-                color: #43D9AD;
+            .comment {
+                font-size: 16px;
+                color: var(--light-blue);
+                margin-bottom: 10px;
             }
 
-            .value {
-                color: #E99287;
+            .variable {
+                font-size: 16px;
+                font-weight: 500;
+
+                span {
+                    margin: 0 4px;
+                }
+
+                .const {
+                    color: #4D5BCE;
+                }
+
+                .name {
+                    color: #43D9AD;
+                }
+
+                .value {
+                    color: #E99287;
+                    transition: 0.2s;
+
+                    &:hover {
+                        background-color: rgb(31, 77, 107);
+                        text-decoration: underline;
+                    }
+                }
             }
+        }
+    }
+    
+    .photo {
+        img {
+            border-radius: 10000px;
+            box-shadow: 0 0 10px 4px rgba($color: #ffffff, $alpha: 0.2);
         }
     }
 }

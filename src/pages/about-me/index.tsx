@@ -53,7 +53,7 @@ export default function AboutMe() {
           <div className='line'>
             <p>/**
               * About me
-              * I have 5 years of еxperience in web
+              * I have 5 years of experience in web
               * development lorem ipsum dolor sit amet,
               * consectetur adipiscing elit, sed do eiusmod
               * tempor incididunt ut labore et dolore

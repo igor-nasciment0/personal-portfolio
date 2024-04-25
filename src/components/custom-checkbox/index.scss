@@ -1,0 +1,31 @@
+.custom-checkbox {
+    > input {
+        display: none;
+    }
+
+    div {
+        background-color: transparent;
+        border: 1px solid var(--light-blue);
+        border-radius: 2px;
+        width: 18px;
+        height: 18px;
+
+        transition: 0.2s;
+
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        > img {
+            height: 8px !important;
+            width: 12px !important;
+            margin: 0 !important;
+        }
+
+        &:hover {
+            border-color: #FFF;
+        }
+    }
+}

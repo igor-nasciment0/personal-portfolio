@@ -1,10 +1,12 @@
 import './index.scss';
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export default function CustomCheckbox(props: { value: string | number }) {
+export default function CustomCheckbox(props: { value: string | number, checked: boolean }) {
 
     const id = "check-" + props.value;
     const [selected, setSelected] = useState(false);
+
+    useEffect(() => setSelected(props.checked), [props.checked])
 
     return (
         <div className="custom-checkbox">

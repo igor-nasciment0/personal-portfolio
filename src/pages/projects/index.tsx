@@ -1,11 +1,45 @@
-import CustomCheckbox from '../../components/custom-checkbox';
-import PopUp from '../../components/project-popup';
 import './index.scss';
 
+import projectsData from '../../data/projects-info';
+import { limitText } from '../../util/textFunctions';
+import { useEffect, useState } from 'react';
+import { getClassProperties } from '../../util/objectFunctions';
+import { Tech } from '../../data/projects-info/projects/projectInterface';
+
+import ProjectPopUp from '../../components/project-popup';
+import CustomCheckbox from '../../components/custom-checkbox';
+
 export default function Projects() {
+
+    const [projects, setProjects] = useState(projectsData);
+    const [techFilters, setTechFilters]: [string[], Function] = useState([]);
+    const [showProjectInfo, setShowProjectInfo] = useState(false);
+
+    const techs = getClassProperties(Tech);
+
+    function filter(): void {
+        if (!techFilters.length) {
+            setProjects(projectsData);
+            return;
+        }
+
+        setProjects(projectsData.filter(project => {
+            for (let tech of techFilters)
+                return project.techs.some(projectTech => projectTech.name === tech);
+        }))
+    }
+
+    function handleUpdateFilter(tech: string) {
+        if (techFilters.find(element => element === tech))
+            setTechFilters([...techFilters.filter(element => element !== tech)])
+        else
+            setTechFilters([...techFilters, tech]);
+    }
+
+    useEffect(filter, [techFilters]);
+
     return (
-        <main className='page projects'>
-            <PopUp />
+        <main className='page projects' >
             <section className="side-bar">
                 <h1>
                     <img src="/assets/images/icons/arrow-down.svg" alt="" />
@@ -13,45 +47,55 @@ export default function Projects() {
                 </h1>
 
                 <div className='categories'>
-                    <div>
-                        <CustomCheckbox value={"React"} />
-                        <img src="/assets/images/icons/react.svg" alt="" />
-                        <h2>React</h2>
-                    </div>
+                    {techs.map(tech =>
+                        <div onClick={() => handleUpdateFilter(tech.name)}>
+                            <CustomCheckbox value={tech.name} checked={techFilters.some(techFilter => techFilter === tech.name)}/>
+                            <img src={tech.logoURL} alt="" />
+                            <h2>{tech.name}</h2>
+                        </div>
+                    )}
                 </div>
             </section>
 
             <section className='sec-projects'>
                 <div className='title'>
                     <h2>
-                        react; vue
+                        {techFilters.length === 0 ?
+                            'all projects' :
+                            techFilters.map(tech => tech.toLowerCase() + '; ')
+                        }
                         <img src="/assets/images/icons/close-icon.svg" alt="" />
                     </h2>
                 </div>
 
                 <div className='container-projects'>
-                    <div className='project'>
-                        <h3>
-                            UniModeler
-                            <span> // uni_modeler</span>
-                        </h3>
+                    {projects.map(project =>
+                        <div className='project'>
+                            <h3>
+                                {project.name}
+                                <span> // {project.codeName}</span>
+                            </h3>
 
-                        <div>
-                            <ul className='techs'>
-                                <li>
-                                    <img src="/assets/images/icons/react.svg" alt="" />
-                                </li>
-                            </ul>
+                            <div>
+                                <ul className='techs'>
+                                    {project.techs.map(tech =>
+                                        <li style={{ background: tech.color }}>
+                                            <img src={tech.logoURL} alt="" />
+                                        </li>
+                                    )}
+                                </ul>
 
-                            <img src='/assets/images/tech-particles.gif' className='background-image' />
+                                <img src={"/assets/images/projects/" + project.coverImage} className='background-image' />
 
-                            <div className='description'>
-                                <p>Duis aute irure dolor in velit esse cillum dolore.</p>
+                                <div className='description'>
+                                    <p>{limitText(project.description)}</p>
 
-                                <button>view more</button>
+                                    <button onClick={() => {setShowProjectInfo(true)}} >view more</button>
+                                    <ProjectPopUp isOpen={showProjectInfo} setIsOpen={setShowProjectInfo} projectInfo={project}/>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </section>
         </main>

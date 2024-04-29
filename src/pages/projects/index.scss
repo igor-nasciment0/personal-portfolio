@@ -30,6 +30,9 @@
                 display: flex;
                 align-items: center;
 
+                cursor: pointer;
+                transition: 0.2s;
+
                 .custom-checkbox {
                     margin-right: 24px;
                 }
@@ -41,6 +44,7 @@
                 }
 
                 h2 {
+                    user-select: none;
                     font-size: 16px;
                     font-weight: 500;
                     color: #FFF;
@@ -129,11 +133,10 @@
                             justify-content: center;
 
                             padding: 4px;
-                            background-color: #1e5f61;
                             border-radius: 3px;
                         
                             img {
-                                filter: invert(100%) sepia(99%) saturate(23%) hue-rotate(350deg) brightness(106%) contrast(100%);
+                                filter: brightness(10000%);
                                 width: 24px;
                                 height: 24px;
                             }

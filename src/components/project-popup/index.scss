@@ -79,8 +79,8 @@
         }
 
         .vertical-line {
-            width: 1px;
-            height: 90%;
+            border: 1px var(--light-blue) solid;
+            height: 100%;
             align-self: center;
             background-color: #607B96;
         }

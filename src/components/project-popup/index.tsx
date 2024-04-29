@@ -29,7 +29,7 @@ export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: Functi
                         {separateInParagraphs(project.description).map(paragraph => <p>{paragraph}</p>)}
                     </div>
 
-                    <div className='vertical-line' />
+                    <hr className='vertical-line' />
 
                     <div className='techs'>
                         <h2>Techs Used</h2>
@@ -71,9 +71,13 @@ const modalStyles = {
         background: 'unset',
         borderRadius: 'none',
         padding: 'unset',
+        margin: 'auto',
+        height: 'min-content',
+        maxHeight: 'calc(100vh - 20px)',
+        overFlow: 'scroll'
     },
     overlay: {
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        backDropFilter: 'blur(1px)'
+        backDropFilter: 'blur(1px)',
     }
 }

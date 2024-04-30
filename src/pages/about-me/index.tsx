@@ -1,79 +1,111 @@
 import './index.scss';
-import info from './about-me-info/info';
+import aboutMe from '../../data/about-me-info';
+import { useEffect, useState } from 'react';
+import FolderStructure from '../../components/folder-structure';
+import File from '../../data/about-me-info/types/file';
 
 export default function AboutMe() {
-  return (
-    <main className='page about-me'>
-      <section className='side-bar'>
-        <nav>
-          <li>
-            <img src="/assets/images/icons/professional-info-icon.svg" alt="" />
-          </li>
-        </nav>
-        <div className='folder-structure'>
-          <div className='current-folder'>
-            <h1>
-              <img src="/assets/images/icons/arrow-down.svg" alt="" />
-              personal-info
+
+    const [selectedSection, setSelectedSection] = useState(aboutMe[0]);
+    const [openFiles, setOpenFiles] = useState<File[]>([]);
+    const [currentFile, setCurrentFile] = useState<File>();
+
+    useEffect(() => console.log(currentFile), [openFiles]);
+
+    function openFile(file: File) {
+        if (!openFiles.some(alreadyOpen => alreadyOpen.name === file.name))
+            setOpenFiles([...openFiles, file]);
+
+        setCurrentFile(file);
+        console.log(file.content);
+    }
+
+    function closeFile(file: File) {
+        let newOpenFiles = openFiles.filter(alreadyOpen => alreadyOpen.name !== file.name);
+        setOpenFiles(newOpenFiles);
+        setCurrentFile(undefined);
+    }
+
+    return (
+        <main className='page about-me'>
+            <section className='side-bar'>
+                <nav>
+                    {aboutMe.map(section =>
+                        <li onClick={() => setSelectedSection(section)}
+                            className={selectedSection.name === section.name ? "selected" : ""}
+                        >
+                            <img src={"/assets/images/icons/" + section.icon} alt="" />
+                        </li>
+                    )}
+                </nav>
+                <div className='folder-structure'>
+
+                    <FolderStructure section={selectedSection} openFile={openFile} selectedFile={currentFile} />
+
+                    <ContactStructure />
+
+                </div>
+            </section>
+
+            <section className='open-file'>
+                <div className='title' style={!openFiles.length ? { borderBottom: "none" } : {}}>
+                    {
+                        openFiles.map(file =>
+                            <h2 className={file.name === currentFile?.name ? 'selected' : ''}>
+                                <span onClick={() => setCurrentFile(file)}>{file.name}</span>
+                                <img src="/assets/images/icons/close-icon.svg" alt="" onClick={() => closeFile(file)} />
+                            </h2>
+                        )
+                    }
+                </div>
+
+                {currentFile ?
+                    <div className='content'>
+                        
+                    </div>
+                    
+                    :
+
+                    <NoFile />
+                }
+
+            </section>
+        </main>
+    )
+}
+
+function NoFile() {
+    return (
+        <div className='no-file'>
+            <img src="/assets/images/icons/code-file.svg" alt="" />
+            <h3>Open a file to see its content</h3>
+        </div>
+    )
+}
+
+function ContactStructure() {
+
+    const [open, setOpen] = useState(true);
+
+    return (
+        <div className='contact'>
+            <h1 onClick={() => setOpen(!open)}>
+                <img src="/assets/images/icons/arrow-down.svg" alt="" style={{ rotate: open ? '' : '-90deg' }} />
+                contacts
             </h1>
-            <div>
-              <li>bio</li>
-              <li>interests</li>
-              <li>education</li>
-            </div>
-          </div>
-          <div className='contact'>
-            <h1>
-              <img src="/assets/images/icons/arrow-down.svg" alt="" />
-              contacts
-            </h1>
-            <div>
-              <li style={{ wordBreak: "break-word" }}>
-                <img src="/assets/images/icons/mail.svg" alt="" />
-                nascimentoigor@gmail.com
-              </li>
-              <li>
-                <img src="/assets/images/icons/whatsapp.svg" alt="" />
-                (11) 99856-4237
-              </li>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <section className='open-file'>
-        <div className='title'>
-          <h2>
-            personal-info
-            <img src="/assets/images/icons/close-icon.svg" alt="" />
-          </h2>
+            {open &&
+                <div>
+                    <li style={{ wordBreak: "break-word" }}>
+                        <img src="/assets/images/icons/mail.svg" alt="" />
+                        nascimentoigor@gmail.com
+                    </li>
+                    <li>
+                        <img src="/assets/images/icons/whatsapp.svg" alt="" />
+                        (11) 99856-4237
+                    </li>
+                </div>
+            }
         </div>
-
-        <div className='content'>
-          <div className='line'>
-            <p>/**
-              * About me
-              * I have 5 years of experience in web
-              * development lorem ipsum dolor sit amet,
-              * consectetur adipiscing elit, sed do eiusmod
-              * tempor incididunt ut labore et dolore
-              * magna aliqua. Ut enim ad minim veniam,
-              * quis nostrud exercitation ullamco laboris
-              * nisi ut aliquip ex ea commodo consequat.
-              * Duis aute irure dolor in reprehenderit in
-              *
-              * Duis aute irure dolor in reprehenderit in
-              * voluptate velit esse cillum dolore eu fugiat
-              * nulla pariatur. Excepteur sint occaecat
-              * officia deserunt mollit anim id est laborum.
-              */</p>
-          </div>
-
-          <div className='line'>
-            <p>a</p>
-          </div>
-        </div>
-      </section>
-    </main>
-  )
+    )
 }

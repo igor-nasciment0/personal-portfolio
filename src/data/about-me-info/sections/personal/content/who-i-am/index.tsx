@@ -8,7 +8,7 @@ export default function WhoIAm() {
 
             <p>Antes de qualquer outra coisa, sou um jovem cristão. Os valores que me guiam são a fé, a humildade e a busca por sabedoria, glorificando a Deus antes e acima de tudo. </p>
 
-            <p>Algo que me ensinou a importância da disciplina diária para alcançar quaisquer objetivos foi aprender a tocar piano, dos meus 12 aos 16 anos; inclusive tocando na igreja. Foi algo que contribuiu muito para o que eu sou hoje.</p>
+            <p>Algo que me ensinou a importância da disciplina diária para alcançar quaisquer objetivos foi aprender a tocar piano, dos meus 12 aos 16 anos; inclusive tocando na igreja. Foi algo que contribuiu muito para o que sou hoje.</p>
 
             <p>Sou alguém que ama aprender coisas e espero poder contribuir, com a tecnologia, para suprir as necessidades das pessoas.</p>
         </div>

@@ -1,5 +1,4 @@
 import Certificates from "./content/certificates";
-import Curriculum from "./content/curriculum";
 import Presentation from "./content/presentation";
 import Skills from "./content/skills";
 import File from "../../types/file.tsx";
@@ -13,7 +12,6 @@ const professionalSection: Section = {
         new File('presentation.md', Presentation),
         new File('education.md', Education),
         new File('skills.md', Skills),
-        new File('curriculum.md', Curriculum),
         new File('certificates.md', Certificates),
     ]
 }

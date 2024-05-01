@@ -7,7 +7,7 @@ import FileHistory from '../../util/fileHistory.ts';
 import randomColor from 'randomcolor';
 
 const fileHistory = new FileHistory();
-const negriteTextColors = randomColor({luminosity: "light", count: 25})
+const negriteTextColors = randomColor({ luminosity: "light", count: 25 })
 
 export default function AboutMe() {
 
@@ -19,6 +19,10 @@ export default function AboutMe() {
         if (!openFiles.some(alreadyOpen => alreadyOpen.name === file.name))
             setOpenFiles([...openFiles, file]);
 
+        accessFileContent(file);
+    }
+
+    function accessFileContent(file: File) {
         fileHistory.addToHistory(file);
         setCurrentFile(file);
     }
@@ -29,10 +33,9 @@ export default function AboutMe() {
 
         if (file === currentFile) {
             fileHistory.popFromHistory();
-            setCurrentFile(!openFiles.length ? undefined : fileHistory.getLastFile());
-        } else {
-            fileHistory.removeFromHistory(file)
-        }
+            !newOpenFiles.length ? setCurrentFile(undefined) : accessFileContent(fileHistory.getLastFile());
+
+        } else fileHistory.removeFromHistory(file);
     }
 
     function randomColorsInNegriteText() {
@@ -76,7 +79,7 @@ export default function AboutMe() {
                     {
                         openFiles.map(file =>
                             <h2 className={file.name === currentFile?.name ? 'selected' : ''}>
-                                <span onClick={() => setCurrentFile(file)}>{file.name}</span>
+                                <span onClick={() => accessFileContent(file)}>{file.name}</span>
                                 <img src="/assets/images/icons/close-icon.svg" alt="" onClick={() => closeFile(file)} />
                             </h2>
                         )

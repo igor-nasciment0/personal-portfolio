@@ -1,11 +1,13 @@
 import './index.scss';
 import aboutMe from '../../data/about-me-info';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FolderStructure from '../../components/folder-structure';
 import File from '../../data/about-me-info/types/file.tsx';
 import FileHistory from '../../util/fileHistory.ts';
+import randomColor from 'randomcolor';
 
 const fileHistory = new FileHistory();
+const negriteTextColors = randomColor({luminosity: "light", count: 25})
 
 export default function AboutMe() {
 
@@ -25,13 +27,28 @@ export default function AboutMe() {
         const newOpenFiles = openFiles.filter(alreadyOpen => alreadyOpen.name !== file.name);
         setOpenFiles(newOpenFiles);
 
-        if(file === currentFile) {
+        if (file === currentFile) {
             fileHistory.popFromHistory();
-            setCurrentFile(fileHistory.getLastFile());
+            setCurrentFile(!openFiles.length ? undefined : fileHistory.getLastFile());
         } else {
             fileHistory.removeFromHistory(file)
         }
     }
+
+    function randomColorsInNegriteText() {
+        const textArea = document.getElementsByClassName("plain-text")[0];
+
+        if (textArea) {
+            const elements = textArea.querySelectorAll("b");
+
+            for (let i = 0; i < elements.length; i++) {
+                const element = elements[i];
+                element.style.color = negriteTextColors[i];
+            }
+        }
+    }
+
+    useEffect(randomColorsInNegriteText, [currentFile]);
 
     return (
         <main className='page about-me'>
@@ -70,7 +87,7 @@ export default function AboutMe() {
                     <div className='content'>
                         {currentFile.content()}
                     </div>
-                    
+
                     :
 
                     <NoFile />

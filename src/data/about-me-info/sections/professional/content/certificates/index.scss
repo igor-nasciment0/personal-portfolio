@@ -1,0 +1,55 @@
+.certificados {
+    color: #fff;
+
+    h1 {
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 150%;
+        margin-bottom: 7px;
+    }
+
+    hr {
+        margin-bottom: 22px;
+    }
+
+    > section {
+        display: grid;
+        align-items: end;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+
+        > .certificate {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+
+            cursor: pointer;
+            transition: 0.3s;
+
+            h2 {
+                font-size: 24px;
+                font-weight: 600;
+                line-height: 150%;
+            }
+
+            > img {
+                padding: 4px;
+                background-color: var(--light-blue);
+                max-height: 370px;
+                height: 100%;
+                width: 100%;
+
+                transition: 0.3s;
+            }
+
+            &:hover {
+                > img {
+                    box-shadow: 0 0 4px 3px rgba(255, 255, 255, 0.25);
+                    transform: translateY(-2px);
+                }
+            }
+        }
+    }
+}

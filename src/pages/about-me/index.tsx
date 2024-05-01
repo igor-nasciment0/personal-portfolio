@@ -1,8 +1,8 @@
 import './index.scss';
 import aboutMe from '../../data/about-me-info';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import FolderStructure from '../../components/folder-structure';
-import File from '../../data/about-me-info/types/file';
+import File from '../../data/about-me-info/types/file.tsx';
 
 export default function AboutMe() {
 
@@ -10,18 +10,15 @@ export default function AboutMe() {
     const [openFiles, setOpenFiles] = useState<File[]>([]);
     const [currentFile, setCurrentFile] = useState<File>();
 
-    useEffect(() => console.log(currentFile), [openFiles]);
-
     function openFile(file: File) {
         if (!openFiles.some(alreadyOpen => alreadyOpen.name === file.name))
             setOpenFiles([...openFiles, file]);
 
         setCurrentFile(file);
-        console.log(file.content);
     }
 
     function closeFile(file: File) {
-        let newOpenFiles = openFiles.filter(alreadyOpen => alreadyOpen.name !== file.name);
+        const newOpenFiles = openFiles.filter(alreadyOpen => alreadyOpen.name !== file.name);
         setOpenFiles(newOpenFiles);
         setCurrentFile(undefined);
     }
@@ -61,7 +58,7 @@ export default function AboutMe() {
 
                 {currentFile ?
                     <div className='content'>
-                        
+                        {currentFile.content()}
                     </div>
                     
                     :

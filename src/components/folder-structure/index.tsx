@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Section from "../../data/about-me-info/types/section";
+import Section from "../../data/about-me-info/types/section.ts";
 import randomColor from 'randomcolor';
-import File from "../../data/about-me-info/types/file";
+import File from "../../data/about-me-info/types/file.tsx";
 
 const colors = randomColor({luminosity: 'light', count: 10});
 

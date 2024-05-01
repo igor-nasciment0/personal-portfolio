@@ -1,0 +1,15 @@
+.curriculum {
+    display: flex;
+    flex-direction: column;
+
+    img {
+        cursor: pointer;
+        transition: 0.3s;
+        max-height: 600px;
+        align-self: center;
+    
+        &:hover {
+            box-shadow: 0 0 5px 4px rgba($color: #3083d6, $alpha: 0.8);
+        }
+    }
+}

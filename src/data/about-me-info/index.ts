@@ -1,7 +1,9 @@
 import professionalSection from "./sections/professional";
+import personalSection from "./sections/personal";
 
-let aboutMe = [
-    professionalSection
+const aboutMe = [
+    professionalSection,
+    personalSection,
 ]
 
 export default aboutMe;

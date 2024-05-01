@@ -3,6 +3,9 @@ import aboutMe from '../../data/about-me-info';
 import { useState } from 'react';
 import FolderStructure from '../../components/folder-structure';
 import File from '../../data/about-me-info/types/file.tsx';
+import FileHistory from '../../util/fileHistory.ts';
+
+const fileHistory = new FileHistory();
 
 export default function AboutMe() {
 
@@ -14,13 +17,20 @@ export default function AboutMe() {
         if (!openFiles.some(alreadyOpen => alreadyOpen.name === file.name))
             setOpenFiles([...openFiles, file]);
 
+        fileHistory.addToHistory(file);
         setCurrentFile(file);
     }
 
     function closeFile(file: File) {
         const newOpenFiles = openFiles.filter(alreadyOpen => alreadyOpen.name !== file.name);
         setOpenFiles(newOpenFiles);
-        setCurrentFile(undefined);
+
+        if(file === currentFile) {
+            fileHistory.popFromHistory();
+            setCurrentFile(fileHistory.getLastFile());
+        } else {
+            fileHistory.removeFromHistory(file)
+        }
     }
 
     return (

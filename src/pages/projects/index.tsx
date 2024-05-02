@@ -12,7 +12,7 @@ import CustomCheckbox from '../../components/custom-checkbox';
 export default function Projects() {
 
     const [projects, setProjects] = useState(projectsData);
-    const [techFilters, setTechFilters]: [string[], Function] = useState([]);
+    const [techFilters, setTechFilters] = useState<string[]>([]);
     const [showProjectInfo, setShowProjectInfo] = useState(false);
 
     const techs = getClassProperties(Tech);
@@ -24,7 +24,7 @@ export default function Projects() {
         }
 
         setProjects(projectsData.filter(project => {
-            for (let tech of techFilters)
+            for (const tech of techFilters)
                 return project.techs.some(projectTech => projectTech.name === tech);
         }))
     }
@@ -49,7 +49,7 @@ export default function Projects() {
                 <div className='categories'>
                     {techs.map(tech =>
                         <div onClick={() => handleUpdateFilter(tech.name)}>
-                            <CustomCheckbox value={tech.name} checked={techFilters.some(techFilter => techFilter === tech.name)}/>
+                            <CustomCheckbox value={tech.name} checked={techFilters.some(techFilter => techFilter === tech.name)} />
                             <img src={tech.logoURL} alt="" />
                             <h2>{tech.name}</h2>
                         </div>
@@ -60,11 +60,11 @@ export default function Projects() {
             <section className='sec-projects'>
                 <div className='title'>
                     <h2>
+                        <img src="/assets/images/icons/arrow-next.svg" alt="" />
                         {techFilters.length === 0 ?
                             'all projects' :
                             techFilters.map(tech => tech.toLowerCase() + '; ')
                         }
-                        <img src="/assets/images/icons/close-icon.svg" alt="" />
                     </h2>
                 </div>
 
@@ -90,8 +90,8 @@ export default function Projects() {
                                 <div className='description'>
                                     <p>{limitText(project.description)}</p>
 
-                                    <button onClick={() => {setShowProjectInfo(true)}} >view more</button>
-                                    <ProjectPopUp isOpen={showProjectInfo} setIsOpen={setShowProjectInfo} projectInfo={project}/>
+                                    <button onClick={() => { setShowProjectInfo(true) }} >view more</button>
+                                    <ProjectPopUp isOpen={showProjectInfo} setIsOpen={setShowProjectInfo} projectInfo={project} />
                                 </div>
                             </div>
                         </div>

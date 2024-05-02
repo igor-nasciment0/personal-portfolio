@@ -1,4 +1,4 @@
-import Project, { Tech } from "./projectInterface";
+import Project, { Tech } from "../types";
 
 const UniModelerProject: Project = {
     name: "UniModeler",

@@ -1,4 +1,4 @@
-import { Tech } from "../data/projects-info/projects/projectInterface";
+import { Tech } from "../data/projects-info/types";
 
 export function getClassProperties(techClass: any): Tech[] {
     let properties: Tech[] = [];

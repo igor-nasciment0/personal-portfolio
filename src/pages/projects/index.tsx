@@ -4,7 +4,7 @@ import projectsData from '../../data/projects-info';
 import { limitText } from '../../util/textFunctions';
 import { useEffect, useState } from 'react';
 import { getClassProperties } from '../../util/objectFunctions';
-import { Tech } from '../../data/projects-info/projects/projectInterface';
+import { Tech } from '../../data/projects-info/types';
 
 import ProjectPopUp from '../../components/project-popup';
 import CustomCheckbox from '../../components/custom-checkbox';

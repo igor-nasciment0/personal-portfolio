@@ -1,5 +1,5 @@
 import './index.scss';
-import ProjectInterface from '../../data/projects-info/projects/projectInterface';
+import ProjectInterface from '../../data/projects-info/types';
 import { separateInParagraphs } from '../../util/textFunctions';
 
 import Modal from 'react-modal';

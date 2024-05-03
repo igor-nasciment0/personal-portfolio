@@ -1,10 +1,11 @@
 import './index.scss';
-import ProjectInterface from '../../data/projects-info/types';
+import { Project } from '../../data/projects-info/types';
 import { separateInParagraphs } from '../../util/textFunctions';
 
 import Modal from 'react-modal';
+import React from 'react';
 
-export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: Function, projectInfo: ProjectInterface }) {
+export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: React.Dispatch<React.SetStateAction<boolean>>, projectInfo: Project }) {
 
     const project = props.projectInfo;
 
@@ -74,10 +75,11 @@ const modalStyles = {
         margin: 'auto',
         height: 'min-content',
         maxHeight: 'calc(100vh - 20px)',
-        overFlow: 'scroll'
+        overFlow: 'scroll',
+        width: 'fit-content',
     },
     overlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        backDropFilter: 'blur(1px)',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        backdropFilter: 'blur(1px)',
     }
 }

@@ -89,13 +89,16 @@
             display: grid;
             justify-items: center;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 15px;
+            row-gap: 60px;
+            column-gap: 15px;
             align-items: end;
 
             >.project {
                 max-width: 450px;
                 display: flex;
                 flex-direction: column;
+                align-self: stretch;
+                justify-content: space-between;
                 gap: 15px;
 
                 >h3 {
@@ -149,7 +152,6 @@
 
                     >.background-image {
                         width: 100%;
-                        height: 40%;
                         background-color: #5565E8;
 
                         border-top-left-radius: 15px;

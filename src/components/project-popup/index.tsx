@@ -45,7 +45,7 @@ export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: React.
                         </div>
 
                         {project.siteURL ?
-                            <a href={project.siteURL} className='live'>
+                            <a href={project.siteURL} target='_blank' className='live'>
                                 <img src="/assets/images/icons/link.svg" alt="" />
                                 see it on live
                             </a>
@@ -55,7 +55,7 @@ export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: React.
                             <h3 className='unfinished'>Still working on this one!</h3>
                         }
 
-                        <a href={project.repositoryURL} className='github'>
+                        <a href={project.repositoryURL} target='_blank' className='github'>
                             <img src="/assets/images/icons/github.svg" alt="" />
                             check repository
                         </a>

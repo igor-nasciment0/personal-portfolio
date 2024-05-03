@@ -4,7 +4,7 @@ import projectsData from '../../data/projects-info';
 import { limitText } from '../../util/textFunctions';
 import { useEffect, useState } from 'react';
 import { getClassProperties } from '../../util/objectFunctions';
-import { Tech } from '../../data/projects-info/types';
+import { Project, Tech } from '../../data/projects-info/types';
 
 import ProjectPopUp from '../../components/project-popup';
 import CustomCheckbox from '../../components/custom-checkbox';
@@ -14,6 +14,7 @@ export default function Projects() {
     const [projects, setProjects] = useState(projectsData);
     const [techFilters, setTechFilters] = useState<string[]>([]);
     const [showProjectInfo, setShowProjectInfo] = useState(false);
+    const [projectInfo, setProjectInfo] = useState<Project>(projects[0]);
 
     const techs = getClassProperties(Tech);
 
@@ -72,8 +73,8 @@ export default function Projects() {
                     {projects.map(project =>
                         <div className='project'>
                             <h3>
-                                {project.name}
-                                <span> // {project.codeName}</span>
+                                {project.name + " "}
+                                <span>// {project.codeName}</span>
                             </h3>
 
                             <div>
@@ -90,8 +91,8 @@ export default function Projects() {
                                 <div className='description'>
                                     <p>{limitText(project.description)}</p>
 
-                                    <button onClick={() => { setShowProjectInfo(true) }} >view more</button>
-                                    <ProjectPopUp isOpen={showProjectInfo} setIsOpen={setShowProjectInfo} projectInfo={project} />
+                                    <button onClick={() => { setShowProjectInfo(true); setProjectInfo(project)}} >view more</button>
+                                    <ProjectPopUp isOpen={showProjectInfo} setIsOpen={setShowProjectInfo} projectInfo={projectInfo} />
                                 </div>
                             </div>
                         </div>

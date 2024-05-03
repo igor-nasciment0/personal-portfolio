@@ -2,7 +2,7 @@ import './index.scss';
 
 interface pageProps {
   currentPage: string,
-  setCurrentPage: Function,
+  setCurrentPage: React.Dispatch<React.SetStateAction<string>>
 }
 
 export default function Header({ currentPage, setCurrentPage }: pageProps) {
@@ -13,8 +13,8 @@ export default function Header({ currentPage, setCurrentPage }: pageProps) {
       </div>
       <nav>
         <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"home"} myText={"_hello"} />
-        <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"about-me"} myText={"_about-me"} />
         <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"projects"} myText={"_projects"} />
+        <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"about-me"} myText={"_about-me"} />
       </nav>
       <button>
         _contact-me

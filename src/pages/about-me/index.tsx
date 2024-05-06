@@ -33,7 +33,8 @@ export default function AboutMe() {
 
         if (file === currentFile) {
             fileHistory.popFromHistory();
-            !newOpenFiles.length ? setCurrentFile(undefined) : accessFileContent(fileHistory.getLastFile());
+            console.log(fileHistory);
+            !newOpenFiles.length ? setCurrentFile(undefined) : setCurrentFile(fileHistory.getLastFile());
 
         } else fileHistory.removeFromHistory(file);
     }

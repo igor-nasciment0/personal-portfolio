@@ -4,11 +4,14 @@ import Hobbies from "./content/hobbies-and-interests";
 import WhoIAm from "./content/who-i-am";
 
 const personalSection: Section = {
-    name: 'personal-info',
+    name: {
+        pt_br:'info-pessoal',
+        en_us: 'personal-info'
+    },
     icon: 'personal-info-icon.svg',
     files: [
-        new File('who-i-am.md', WhoIAm),
-        new File('hobbies-and-interests.md', Hobbies)
+        new File('quem-sou-eu.md', 'who-i-am.md', WhoIAm),
+        new File('hobbies-e-interesses.md', 'hobbies-and-interests.md', Hobbies)
     ]
 }
 

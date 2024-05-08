@@ -14,7 +14,7 @@
             padding: 15px 20px;
         }
 
-        a {
+        .linkedin {
             padding: 14px 12px;
 
             display: flex;
@@ -35,25 +35,51 @@
                 background-color: rgba($color: #ffffff, $alpha: 0.1);
             }
         }
-    }
 
-    >a {
-        display: flex;
-        align-items: center;
-        transition: 0.3s;
-
-        padding: 0 22px;
-        border-left: var(--border-style);
-        border-right: var(--border-style);
-
-        img {
-            width: 24px;
-            height: 24px;
-            margin-left: 5px;
+        .github {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            transition: 0.3s;
+    
+            padding: 0 22px;
+            border-left: var(--border-style);
+            border-right: var(--border-style);
+    
+            img {
+                width: 24px;
+                height: 24px;
+                margin-left: 5px;
+            }
+    
+            &:hover {
+                background-color: rgba($color: #ffffff, $alpha: 0.1);
+            }
         }
 
-        &:hover {
-            background-color: rgba($color: #ffffff, $alpha: 0.1);
+        button {
+            display: flex;
+            align-items: center;
+
+            font-size: 14px;
+            font-weight: 500;
+
+            background-color: rgba($color: #ffffff, $alpha: 0.07);
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 3px;
+
+            cursor: pointer;
+            transition: 0.2s;
+
+            &:hover {
+                background-color: rgba($color: #ffffff, $alpha: 0.1);
+            }
+
+            img {
+                width: 20px;
+                margin-right: 10px;
+            }
         }
     }
 }

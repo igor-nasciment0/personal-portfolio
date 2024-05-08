@@ -2,12 +2,14 @@ import './index.scss';
 
 import projectsData from '../../data/projects-info';
 import { limitText } from '../../util/textFunctions';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getClassProperties } from '../../util/objectFunctions';
 import { Project, Tech } from '../../data/projects-info/types';
 
 import ProjectPopUp from '../../components/project-popup';
 import CustomCheckbox from '../../components/custom-checkbox';
+import LanguageContext from '../../context';
+import ProjectsContent from './content';
 
 export default function Projects() {
 
@@ -16,9 +18,12 @@ export default function Projects() {
     const [showProjectInfo, setShowProjectInfo] = useState(false);
     const [projectInfo, setProjectInfo] = useState<Project>(projects[0]);
 
+    const [showFilters, setShowFilters] = useState(true);
     const techs = getClassProperties(Tech);
 
-    function filter(): void {
+    const language = useContext(LanguageContext);
+
+    function filter() {
         if (!techFilters.length) {
             setProjects(projectsData);
             return;
@@ -42,20 +47,22 @@ export default function Projects() {
     return (
         <main className='page projects' >
             <section className="side-bar">
-                <h1>
-                    <img src="/assets/images/icons/arrow-down.svg" alt="" />
-                    projects
+                <h1 onClick={() => setShowFilters(!showFilters)}>
+                    <img src="/assets/images/icons/arrow-down.svg" style={showFilters ? { rotate: "-90deg" } : {}} alt="" />
+                    {ProjectsContent[language].filters_title}
                 </h1>
 
-                <div className='categories'>
-                    {techs.map(tech =>
-                        <div onClick={() => handleUpdateFilter(tech.name)}>
-                            <CustomCheckbox value={tech.name} checked={techFilters.some(techFilter => techFilter === tech.name)} />
-                            <img src={tech.logoURL} alt="" />
-                            <h2>{tech.name}</h2>
-                        </div>
-                    )}
-                </div>
+                {showFilters &&
+                    <div className='categories'>
+                        {techs.map(tech =>
+                            <div onClick={() => handleUpdateFilter(tech.name)}>
+                                <CustomCheckbox value={tech.name} checked={techFilters.some(techFilter => techFilter === tech.name)} />
+                                <img src={tech.logoURL} alt="" />
+                                <h2>{tech.name}</h2>
+                            </div>
+                        )}
+                    </div>
+                }
             </section>
 
             <section className='sec-projects'>
@@ -63,7 +70,7 @@ export default function Projects() {
                     <h2>
                         <img src="/assets/images/icons/arrow-next.svg" alt="" />
                         {techFilters.length === 0 ?
-                            'all projects' :
+                            ProjectsContent[language].all_projects_title :
                             techFilters.map(tech => tech.toLowerCase() + '; ')
                         }
                     </h2>
@@ -89,9 +96,9 @@ export default function Projects() {
                                 <img src={"/assets/images/projects/" + project.coverImage} className='background-image' />
 
                                 <div className='description'>
-                                    <p>{limitText(project.description)}</p>
+                                    <p>{limitText(project.description[language])}</p>
 
-                                    <button onClick={() => { setShowProjectInfo(true); setProjectInfo(project)}} >view more</button>
+                                    <button onClick={() => { setShowProjectInfo(true); setProjectInfo(project)}}>{ProjectsContent[language].project_button  }</button>
                                     <ProjectPopUp isOpen={showProjectInfo} setIsOpen={setShowProjectInfo} projectInfo={projectInfo} />
                                 </div>
                             </div>

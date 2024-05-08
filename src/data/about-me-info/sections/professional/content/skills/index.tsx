@@ -1,28 +1,35 @@
+import { useContext } from "react"
+import LanguageContext from "../../../../../../context"
+import SkillsContent from "./content";
+import HardSkills from "./hardskills";
+import SoftSkills from "./softskills";
+
 export default function Skills() {
+
+    const language = useContext(LanguageContext);
+    const content = SkillsContent[language];
+
     return (
         <div className="plain-text">
-            <h1>Habilidades</h1>
+            <h1>{content.title as string}</h1>
             <hr />
-            <h2>Habilidades técnicas</h2>
-            <p>As principais habilidades técnicas com as quais já possuo familiaridade são:</p>
+            <h2>{content.hs_subtitle as string}</h2>
+            <p>{content.hs_p as string}</p>
 
             <ul>
-                <li><b>HTML e CSS</b> no desenvolvimento de páginas web</li>
-                <li><b>React</b>, no desenvolvimento de sites dinâmicos e interativos</li>
-                <li><b>Express.js</b> para a elaboração de API's </li>
-                <li><b>MongoDB</b> no consumo de bancos de dados não relacionais </li>
-                <li><b>MySQL</b> no consumo de bancos de dados relacionais </li>
+                {HardSkills.map(skill => 
+                    <li><b>{skill.title[language]}</b> {skill.description[language]}</li>
+                )}
             </ul>
 
-            <p>Possuo ainda entendimento do <b>inglês</b> falado e escrito.</p>
+            <p>{content.hs_p2} <b>{content.hs_p2_highlight}</b> {content.hs_p2_part2}</p>
             
-            <h2>Habilidades comportamentais</h2>
-            <p>As principais habilidades comportamentais com as quais me identifico são:</p>
+            <h2>{content.ss_subtitle}</h2>
+            <p>{content.ss_p}</p>
             <ul>
-                <li><b>Disposição constante</b> para aprender e superar desafios</li>
-                <li><b>Facilidade</b> de aprendizado</li>
-                <li><b>Liderança</b> e <b>participação</b> em projetos</li>
-                <li><b>Proatividade</b></li>
+                {SoftSkills.map(skill => 
+                    <li><b>{skill.title[language]}</b> {skill.description[language]}</li>
+                )}
             </ul>
         </div>
     )

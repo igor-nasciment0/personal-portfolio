@@ -1,6 +1,12 @@
+import { useContext } from 'react';
 import './index.scss';
+import LanguageContext from '../../context';
+import HomeContent from './content';
 
 export default function Home() {
+
+    const language = useContext(LanguageContext);
+
     return (
         <main className='page home'>
             <div className='background' />
@@ -8,19 +14,18 @@ export default function Home() {
             <div className='content'>
                 <section className='text'>
                     <div>
-                        <p>Hello there. My name is</p>
+                        <p>{HomeContent[language].p_saudation}</p>
                         <h1>Igor Nascimento</h1>
-                        <h2>&gt; Web Apps Developer</h2>
+                        <h2>&gt; Web Developer</h2>
                     </div>
 
                     <div>
-                        <p className='comment'>// complete the game to continue</p>
-                        <p className='comment'>// you can also see it on my Github page</p>
+                        <p className='comment'>// {HomeContent[language].p_github}</p>
                         <p className='variable'>
                             <span className='const'>const</span>
                             <span className='name'>githubLink</span>
                             <span>=</span>
-                            <span className='value'><a href="https://github.com/igor-nasciment0">"https://github.com/igor-nasciment0"</a></span>
+                            <span className='value'><a href="https://github.com/igor-nasciment0" target='_blank'>"https://github.com/igor-nasciment0"</a></span>
                         </p>
                     </div>
                 </section>

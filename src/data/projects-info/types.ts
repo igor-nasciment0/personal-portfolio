@@ -1,7 +1,11 @@
 export interface Project {
     name: string,
     codeName: string,
-    description: string,
+    description: {
+        pt_br: string,
+        en_us: string,
+        [key: string]: string
+    },
     coverImage: string
     techs: Tech[],
     siteURL?: string,

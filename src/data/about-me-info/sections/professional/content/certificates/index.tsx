@@ -1,16 +1,22 @@
+import { useContext } from "react";
+import CertificatesContent, { certificates } from "./content";
 import "./index.scss";
+import LanguageContext from "../../../../../../context";
 const certificatesFolderPath = "/assets/certificates/";
 
 export default function Certificates() {
+
+    const language = useContext(LanguageContext);
+
     return (
         <div className="certificados">
-            <h1>Certificados</h1>
+            <h1>{CertificatesContent[language].title}</h1>
             <hr />
 
             <section>
                 {certificates.map(certificate =>
                     <div className="certificate" onClick={() => window.open(certificatesFolderPath + certificate.filePath)}>
-                        <h2>{certificate.name}</h2>
+                        <h2>{certificate.name[language]}</h2>
 
                         <img src={certificatesFolderPath + certificate.imgPath} alt="" />
                     </div>
@@ -20,15 +26,3 @@ export default function Certificates() {
         </div >
     )
 }
-
-interface certificate {
-    name: string,
-    imgPath: string,
-    filePath: string
-}
-
-const certificates: certificate[] = [
-    { name: "Udemy: Data Structures & Algorithms", imgPath: "udemy-dsa.jpg", filePath: "udemy-dsa.pdf" },
-    { name: "CS50: Introdução à Ciência da Computação (Harvard)", imgPath: "cs50.jpg", filePath: "cs50.pdf"},
-    { name: "Alura: vários cursos", imgPath: "alura.jpg", filePath: "alura.pdf"}
-]

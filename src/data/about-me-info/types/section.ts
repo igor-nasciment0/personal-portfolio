@@ -1,7 +1,11 @@
 import File from "./file.tsx";
 
 export default interface Section {
-    name: string;
+    name: {
+        pt_br: string,
+        en_us: string,
+        [key: string]: string
+    };
     icon: string;
     files: File[];
 }

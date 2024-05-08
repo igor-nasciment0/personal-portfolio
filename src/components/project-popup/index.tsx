@@ -3,11 +3,14 @@ import { Project } from '../../data/projects-info/types';
 import { separateInParagraphs } from '../../util/textFunctions';
 
 import Modal from 'react-modal';
-import React from 'react';
+import React, { useContext } from 'react';
+import LanguageContext from '../../context';
+import PopupContent from './content';
 
 export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: React.Dispatch<React.SetStateAction<boolean>>, projectInfo: Project }) {
 
     const project = props.projectInfo;
+    const language = useContext(LanguageContext);
 
     return (
         <Modal isOpen={props.isOpen} 
@@ -27,13 +30,13 @@ export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: React.
                 <div className='description'>
                     <div className='text'>
                         <h3>{project.name}</h3>
-                        {separateInParagraphs(project.description).map(paragraph => <p>{paragraph}</p>)}
+                        {separateInParagraphs(project.description[language]).map(paragraph => <p>{paragraph}</p>)}
                     </div>
 
                     <hr className='vertical-line' />
 
                     <div className='techs'>
-                        <h2>Techs Used</h2>
+                        <h2>{PopupContent[language].techs_title}</h2>
 
                         <div>
                             {project.techs.map(tech =>
@@ -47,17 +50,17 @@ export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: React.
                         {project.siteURL ?
                             <a href={project.siteURL} target='_blank' className='live'>
                                 <img src="/assets/images/icons/link.svg" alt="" />
-                                see it on live
+                                {PopupContent[language].live_link}
                             </a>
 
                             :
 
-                            <h3 className='unfinished'>Still working on this one!</h3>
+                            <h3 className='unfinished'>{PopupContent[language].unfinished_message}</h3>
                         }
 
                         <a href={project.repositoryURL} target='_blank' className='github'>
                             <img src="/assets/images/icons/github.svg" alt="" />
-                            check repository
+                            {PopupContent[language].github_link}
                         </a>
                     </div>
                 </div>

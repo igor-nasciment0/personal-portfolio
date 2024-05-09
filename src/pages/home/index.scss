@@ -28,7 +28,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        height: min-content;
+        overflow: hidden;
         gap: 3vw;
     }
 
@@ -148,6 +148,7 @@
         .content {
             flex-direction: column-reverse;
             gap: 30px;
+            overflow: hidden;
         }
 
         .text {

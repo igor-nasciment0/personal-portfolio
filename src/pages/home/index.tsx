@@ -8,7 +8,7 @@ export default function Home() {
     const language = useContext(LanguageContext);
 
     return (
-        <main className='page home' id='page-home'>
+        <main className='page home'>
             <div className='background' />
 
             <div className='content'>

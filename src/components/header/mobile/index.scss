@@ -4,7 +4,7 @@
     align-items: center;
 
     z-index: 3;
-    position: absolute;
+    position: fixed;
     top: 0;
 
     transition: 0.2s;
@@ -46,6 +46,7 @@
         flex-direction: column;
         justify-content: space-between;
         flex-grow: 1;
+        max-height: calc(100vh - 58px);
 
         nav {
             width: 100vw;

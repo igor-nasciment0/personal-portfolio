@@ -65,24 +65,20 @@ function Menu({ currentPage, setCurrentPage, setLanguage }: pageProps) {
 }
 
 function usePageYPosition() {
-    const element = document.getElementById('page-home');
     const [positionY, setPositionY] = useState(0);
 
     useEffect(() => {
         function handleScroll() {
-            if (element) {                
-                setPositionY(element.scrollTop);
-            }
+            setPositionY(window.scrollY);
         }
 
-        if (element) {
-            element.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll);
 
-            return () => {
-                element.removeEventListener('scroll', handleScroll);
-            };
-        }
-    }, [element]);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+
+    }, []);
 
     return positionY;
 }

@@ -6,14 +6,9 @@
   --border-style: 1px solid #1E2D3D;
 }
 
-body {
-  height: 100vh;
-}
-
 #root {
   background-color: var(--dark-blue);
   color: var(--light-blue);
-  height: 100vh;
 
   display: flex;
   flex-direction: column;

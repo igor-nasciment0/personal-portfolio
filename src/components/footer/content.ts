@@ -6,7 +6,7 @@ const FooterContent: LanguageContent = {
     },
 
     en_us: {
-        p_social_links: "find me in"
+        p_social_links: "find me in:"
     }
 }
 

@@ -14,9 +14,9 @@ function App() {
   return (
     <>
       <LanguageContext.Provider value={currentLanguage}>
-        <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <Header currentPage={currentPage} setCurrentPage={setCurrentPage} setLanguage={setCurrentLanguage}/>
         <PageSwitcher currentPage={currentPage} />
-        <Footer setLanguage={setCurrentLanguage}/>
+        <Footer setLanguage={setCurrentLanguage} />
       </LanguageContext.Provider>
     </>
   )

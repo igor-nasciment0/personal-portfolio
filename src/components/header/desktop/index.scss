@@ -1,14 +1,18 @@
 .main-header {
     display: flex;
     flex-direction: row;
-    color: var(--light-blue);
 
+    background-color: var(--dark-blue);
+    z-index: 3;
+
+    color: var(--light-blue);
     border: var(--border-style);
     
     > div {
         max-width: 320px;
-        width: 100%;
         padding: 22px 17px;
+        padding-right: 11vw;
+
         border-right: var(--border-style);
 
         position: relative;

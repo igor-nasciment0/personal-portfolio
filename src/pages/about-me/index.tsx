@@ -1,7 +1,7 @@
 import './index.scss';
 import aboutMe from '../../data/about-me-info';
 import { useContext, useEffect, useState } from 'react';
-import FolderStructure from '../../components/folder-structure';
+import FolderStructure from '../../components/folder-structure/index.tsx';
 import File from '../../data/about-me-info/types/file.tsx';
 import FileHistory from '../../util/fileHistory.ts';
 import randomColor from 'randomcolor';

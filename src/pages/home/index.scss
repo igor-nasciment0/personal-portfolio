@@ -5,7 +5,6 @@
 
     padding: 80px 20px;
 
-    position: relative;
     z-index: 2;
 
     background: url("/assets/images/blurs.png");
@@ -30,7 +29,7 @@
         flex-direction: row;
         align-items: center;
         height: min-content;
-        gap: 100px;
+        gap: 3vw;
     }
 
     .text {
@@ -41,7 +40,7 @@
         div {
             display: flex;
             flex-direction: column;
-            text-align: center;
+            text-align: left;
             color: #E5E9F0;
 
             p {
@@ -91,13 +90,77 @@
                     }
                 }
             }
+
+            @media (max-width: 1000px) {
+                h1 {
+                    font-size: 50px;
+                }
+            }
+
+            @media (max-width: 500px) {
+                h1 {
+                    font-size: 42px;
+                }
+
+                p {
+                    font-size: 16px;
+                }
+
+                .comment {
+                    font-size: 14px;
+                }
+                
+                .variable {
+                    font-size: 14px;
+                }
+            }
+
+            @media (max-width: 400px) {
+                h1 {
+                    font-size: 36px;
+                }
+
+                h2 {
+                    font-size: 24px;
+                }
+            }
         }
     }
-    
+
     .photo {
         img {
             border-radius: 10000px;
             box-shadow: 0 0 10px 4px rgba($color: #ffffff, $alpha: 0.2);
+            width: clamp(350px, 30vw, 400px);
+
+            @media(max-width: 500px) {
+                width: clamp(280px, 62vw, 350px);
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .home {
+
+        background-position: center bottom;
+
+        .content {
+            flex-direction: column-reverse;
+            gap: 30px;
+        }
+
+        .text {
+            gap: 30px;
+
+            >div {
+                text-align: center;
+
+                span {
+                    overflow-wrap: break-word;
+                    text-wrap: wrap;
+                }
+            }
         }
     }
 }

@@ -1,44 +1,15 @@
-import { useContext } from 'react';
-import './index.scss';
-import LanguageContext from '../../context';
-import HeaderContent from './content';
+import HeaderMobile from './mobile';
+import HeaderDesktop from './desktop';
+import { pageProps } from './components';
+import { useIsMobile } from '../../util/mediaQueries';
 
-export default function Header({ currentPage, setCurrentPage }: pageProps) {
+export default function Header({ currentPage, setCurrentPage, setLanguage }: pageProps) {
 
-  const language = useContext(LanguageContext);
+  const isMobile = useIsMobile();
 
   return (
-    <header className="main-header">
-      <div>
-        <h2>igor-nascimento</h2>
-      </div>
-      <nav>
-        <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"home"} myText={HeaderContent.page_home[language]} />
-        <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"projects"} myText={HeaderContent.page_projects[language]} />
-        <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"about-me"} myText={HeaderContent.page_aboutme[language]} />
-      </nav>
-      <button>
-        _contact-me
-      </button>
-    </header>
+    isMobile ?
+      <HeaderMobile currentPage={currentPage} setCurrentPage={setCurrentPage} setLanguage={setLanguage}/> :
+      <HeaderDesktop currentPage={currentPage} setCurrentPage={setCurrentPage} />
   )
-}
-
-function NavigateButton({ currentPage, setCurrentPage, myPage, myText }: buttonProps) {
-  return (
-    <li
-      className={currentPage === myPage ? "selected" : ""}
-      onClick={() => setCurrentPage(myPage)}
-    >{myText}</li>
-  )
-}
-
-interface pageProps {
-  currentPage: string,
-  setCurrentPage: React.Dispatch<React.SetStateAction<string>>
-}
-
-interface buttonProps extends pageProps {
-  myPage: string,
-  myText: string
 }

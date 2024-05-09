@@ -1,4 +1,2 @@
 about-me
-    arrumar bug nas guias de about me, quando você fecha uma ele não entra na outra
-    atualizar curriculo
-    fechar guias ao trocar de seção
+    arrumar guias ao abrir todas e não haver espaço suficiente

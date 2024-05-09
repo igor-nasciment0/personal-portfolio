@@ -10,15 +10,18 @@ import ProjectPopUp from '../../components/project-popup';
 import CustomCheckbox from '../../components/custom-checkbox';
 import LanguageContext from '../../context';
 import ProjectsContent from './content';
+import { useIsMobile } from '../../util/mediaQueries';
 
 export default function Projects() {
+
+    const isMobile = useIsMobile();
 
     const [projects, setProjects] = useState(projectsData);
     const [techFilters, setTechFilters] = useState<string[]>([]);
     const [showProjectInfo, setShowProjectInfo] = useState(false);
     const [projectInfo, setProjectInfo] = useState<Project>(projects[0]);
 
-    const [showFilters, setShowFilters] = useState(true);
+    const [showFilters, setShowFilters] = useState(!isMobile);
     const techs = getClassProperties(Tech);
 
     const language = useContext(LanguageContext);
@@ -46,6 +49,9 @@ export default function Projects() {
 
     return (
         <main className='page projects' >
+
+            <h1>_{ProjectsContent[language].page_title}</h1>
+
             <section className="side-bar">
                 <h1 onClick={() => setShowFilters(!showFilters)}>
                     <img src="/assets/images/icons/arrow-down.svg" style={showFilters ? { rotate: "-90deg" } : {}} alt="" />

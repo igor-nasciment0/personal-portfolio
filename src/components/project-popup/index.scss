@@ -23,7 +23,7 @@
 
         position: relative;
 
-        > button {
+        >button {
             position: absolute;
             right: 10px;
             top: 10px;
@@ -181,6 +181,48 @@
                         background-color: #7393b3;
                     }
                 }
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    #popup .description {
+        flex-direction: column;
+        gap: 16px;
+
+        .text {
+            width: 100%;
+        }
+
+        .techs>div {
+            justify-content: center;
+            margin-bottom: 36px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    #popup {
+        .cover-image {
+            background-size: cover;
+        }
+
+        .description {
+            padding: 16px 24px;
+
+            .text {
+                h3 {
+                    font-size: 20px;
+                }
+
+                p {
+                    font-size: 14px;
+                }
+            }
+
+            .techs h2 {
+                font-size: 18px;
             }
         }
     }

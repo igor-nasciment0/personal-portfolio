@@ -6,11 +6,15 @@ import Modal from 'react-modal';
 import React, { useContext } from 'react';
 import LanguageContext from '../../context';
 import PopupContent from './content';
+import { useIsMobile } from '../../util/mediaQueries';
 
 export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: React.Dispatch<React.SetStateAction<boolean>>, projectInfo: Project }) {
 
     const project = props.projectInfo;
     const language = useContext(LanguageContext);
+    const isMobile = useIsMobile();
+
+    modalStyles.content.inset = isMobile ? '16px' : '40px';
 
     return (
         <Modal isOpen={props.isOpen} 
@@ -80,9 +84,11 @@ const modalStyles = {
         maxHeight: 'calc(100vh - 20px)',
         overFlow: 'scroll',
         width: 'fit-content',
+        inset: '40px'
     },
     overlay: {
         backgroundColor: 'rgba(0, 0, 0, 0.3)',
         backdropFilter: 'blur(1px)',
+        zIndex: 5
     }
 }

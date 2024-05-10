@@ -5,6 +5,7 @@ import Home from './pages/home';
 import AboutMe from './pages/about-me';
 import Projects from './pages/projects';
 import LanguageContext from './context';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
   return (
     <>
       <LanguageContext.Provider value={currentLanguage}>
+        <Toaster position='top-center'/>
         <Header currentPage={currentPage} setCurrentPage={setCurrentPage} setLanguage={setCurrentLanguage}/>
         <PageSwitcher currentPage={currentPage} />
         <Footer setLanguage={setCurrentLanguage} />

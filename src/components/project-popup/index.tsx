@@ -8,7 +8,6 @@ import 'react-responsive-modal/styles.css';
 import React, { useContext, useEffect } from 'react';
 import LanguageContext from '../../context';
 import PopupContent from './content';
-import { useIsMobile } from '../../util/mediaQueries';
 import { blockPageScrolling } from '../../util/blockScrolling';
 import HTMLReactParser from 'html-react-parser/lib/index';
 

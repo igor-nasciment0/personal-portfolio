@@ -131,6 +131,12 @@
         display: flex;
         flex-direction: column;
 
+        max-width: calc(100% - 320px);
+
+        @media (max-width: 1000px) {
+            max-width: calc(100% - 285px);
+        }
+
         >.mobile-file-name {
             display: none;
         }
@@ -145,6 +151,10 @@
                 font-weight: 400;
                 color: var(--light-blue);
                 border-right: var(--border-style);
+
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
 
                 user-select: none;
 
@@ -166,6 +176,9 @@
                 span {
                     padding: 10px 15px;
                     padding-right: 0;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
                 }
 
                 img {
@@ -299,7 +312,7 @@
                 font-size: 16px;
                 font-weight: 500;
 
-                > span {
+                >span {
                     color: #fff;
                 }
             }
@@ -310,7 +323,8 @@
                 max-height: unset;
                 border-top: unset;
 
-                .plain-text, .certificates {
+                .plain-text,
+                .certificates {
 
                     background-color: #1e2d3d96;
                     padding: 10px;

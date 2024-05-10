@@ -299,6 +299,7 @@
 
         .open-file {
             width: 100%;
+            max-width: unset;
 
             >.title {
                 display: none;

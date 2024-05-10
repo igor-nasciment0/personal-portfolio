@@ -11,6 +11,7 @@ import CustomCheckbox from '../../components/custom-checkbox';
 import LanguageContext from '../../context';
 import ProjectsContent from './content';
 import { useIsMobile } from '../../util/mediaQueries';
+import HTMLReactParser from 'html-react-parser/lib/index';
 
 export default function Projects() {
 
@@ -33,8 +34,13 @@ export default function Projects() {
         }
 
         setProjects(projectsData.filter(project => {
+            let projectFitsFilter = false;
+
             for (const tech of techFilters)
-                return project.techs.some(projectTech => projectTech.name === tech);
+                if(project.techs.some(projectTech => projectTech.name === tech)) 
+                    projectFitsFilter = true;
+
+            return projectFitsFilter;
         }))
     }
 
@@ -54,7 +60,7 @@ export default function Projects() {
 
             <section className="side-bar">
                 <h1 onClick={() => setShowFilters(!showFilters)}>
-                    <img src="/assets/images/icons/arrow-down.svg" style={showFilters ? { rotate: "-90deg" } : {}} alt="" />
+                    <img src="/assets/images/icons/arrow-down.svg" style={!showFilters ? { rotate: "-90deg" } : {}} alt="" />
                     {ProjectsContent[language].filters_title}
                 </h1>
 
@@ -102,7 +108,7 @@ export default function Projects() {
                                 <img src={"/assets/images/projects/" + project.coverImage} className='background-image' />
 
                                 <div className='description'>
-                                    <p>{limitText(project.description[language])}</p>
+                                    <p>{HTMLReactParser(limitText(project.description[language]))}</p>
 
                                     <button onClick={() => { setShowProjectInfo(true); setProjectInfo(project)}}>{ProjectsContent[language].project_button  }</button>
                                     <ProjectPopUp isOpen={showProjectInfo} setIsOpen={setShowProjectInfo} projectInfo={projectInfo} />

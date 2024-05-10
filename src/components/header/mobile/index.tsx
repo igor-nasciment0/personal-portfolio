@@ -5,15 +5,23 @@ import HeaderContent from '../content';
 import { NavigateButton, pageProps } from '../components';
 import FooterContent from '../../footer/content';
 import LanguageButton from '../../languageButton';
+import { blockPageScrolling } from '../../../util/blockScrolling';
 
 export default function HeaderMobile({ currentPage, setCurrentPage, setLanguage }: pageProps) {
 
     const [menuOpen, setMenuOpen] = useState(false);
+
+    useEffect(() => blockPageScrolling(menuOpen), [menuOpen])
+
+    useEffect(() => {
+        setTimeout(() => setMenuOpen(false), 500);   
+    }, [currentPage]);
+
     const positionY = usePageYPosition();
 
     return (
         <header className="main-header-mobile"
-            style={menuOpen ? { height: "100vh", backgroundColor: "#011627" } :
+            style={menuOpen ? { height: "100%", backgroundColor: "#011627" } :
                 positionY > 15 ? { backgroundColor: "#011627e6", borderBottom: "var(--border-style)" } : {}
             }
         >

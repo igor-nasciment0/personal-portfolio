@@ -3,18 +3,22 @@ import { Project } from '../../data/projects-info/types';
 import { separateInParagraphs } from '../../util/textFunctions';
 
 import Modal from 'react-modal';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import LanguageContext from '../../context';
 import PopupContent from './content';
 import { useIsMobile } from '../../util/mediaQueries';
+import { blockPageScrolling } from '../../util/blockScrolling';
+import HTMLReactParser from 'html-react-parser/lib/index';
 
 export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: React.Dispatch<React.SetStateAction<boolean>>, projectInfo: Project }) {
+
+    useEffect(() => blockPageScrolling(props.isOpen), [props.isOpen]);
 
     const project = props.projectInfo;
     const language = useContext(LanguageContext);
     const isMobile = useIsMobile();
 
-    modalStyles.content.inset = isMobile ? '16px' : '40px';
+    modalStyles.content.padding = isMobile ? '10px' : '40px';
 
     return (
         <Modal isOpen={props.isOpen} 
@@ -34,7 +38,7 @@ export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: React.
                 <div className='description'>
                     <div className='text'>
                         <h3>{project.name}</h3>
-                        {separateInParagraphs(project.description[language]).map(paragraph => <p>{paragraph}</p>)}
+                        {separateInParagraphs(project.description[language]).map(paragraph => <p>{HTMLReactParser(paragraph)}</p>)}
                     </div>
 
                     <hr className='vertical-line' />
@@ -81,10 +85,12 @@ const modalStyles = {
         padding: 'unset',
         margin: 'auto',
         height: 'min-content',
-        maxHeight: 'calc(100vh - 20px)',
+        maxHeight: 'calc(100% - 20px)',
         overFlow: 'scroll',
         width: 'fit-content',
-        inset: '40px'
+        inset: 'unset',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        backdropFilter: 'blur(1px)',
     },
     overlay: {
         backgroundColor: 'rgba(0, 0, 0, 0.3)',

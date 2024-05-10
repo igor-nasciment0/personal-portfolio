@@ -34,8 +34,8 @@ export const certificates: certificate[] = [
 
     {
         name: {
-            pt_br: "CS50: Introdução à Ciência da Computação (Harvard, Adaptado pela Fundação Estudar)",
-            en_us: "CS50: Introduction to Computer Science (Harvard, Adapted by Fundação Estudar)"
+            pt_br: "CS50: Introdução à Ciência da Computação (Harvard)",
+            en_us: "CS50: Introduction to Computer Science (Harvard)"
         },
         imgPath: "cs50.jpg",
         filePath: "cs50.pdf"

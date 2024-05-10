@@ -1,5 +1,5 @@
 import './index.scss';
-import aboutMe from '../../data/about-me-info';
+import aboutMeData from '../../data/about-me-info';
 import { useContext, useEffect, useState } from 'react';
 import FolderStructure from '../../components/folder-structure/index.tsx';
 import File from '../../data/about-me-info/types/file.tsx';
@@ -7,13 +7,16 @@ import FileHistory from '../../util/fileHistory.ts';
 import randomColor from 'randomcolor';
 import LanguageContext from '../../context.tsx';
 import AboutMeContent from './content.ts';
+import { useIsMobile } from '../../util/mediaQueries.ts';
 
 const fileHistory = new FileHistory();
 const negriteTextColors = randomColor({ luminosity: "light", count: 25 })
 
 export default function AboutMe() {
 
-    const [selectedSection, setSelectedSection] = useState(aboutMe[0]);
+    const isMobile = useIsMobile();
+
+    const [selectedSection, setSelectedSection] = useState(aboutMeData[0]);
     const [openFiles, setOpenFiles] = useState<File[]>([]);
     const [currentFile, setCurrentFile] = useState<File>();
 
@@ -60,9 +63,12 @@ export default function AboutMe() {
 
     return (
         <main className='page about-me'>
+
+            <h1>_{AboutMeContent[language].page_title}</h1>
+
             <section className='side-bar'>
                 <nav>
-                    {aboutMe.map(section =>
+                    {aboutMeData.map(section =>
                         <li onClick={() => setSelectedSection(section)}
                             className={selectedSection.name === section.name ? "selected" : ""}
                         >
@@ -72,9 +78,13 @@ export default function AboutMe() {
                 </nav>
                 <div className='folder-structure'>
 
-                    <FolderStructure section={selectedSection} openFile={openFile} selectedFile={currentFile} />
+                    {isMobile ? aboutMeData.map(section =>
+                        <FolderStructure section={section} openFile={openFile} selectedFile={currentFile} setSection={setSelectedSection}/>
+                    ) :
+                        <FolderStructure section={selectedSection} openFile={openFile} selectedFile={currentFile} setSection={setSelectedSection}/>
+                    }
 
-                    <ContactStructure language={language}/>
+                    <ContactStructure language={language} />
 
                 </div>
             </section>
@@ -91,6 +101,12 @@ export default function AboutMe() {
                     }
                 </div>
 
+                {currentFile &&
+                    <h1 className='mobile-file-name'>
+                        <span>// {selectedSection.name[language]}</span> / {currentFile?.name[language]}
+                    </h1>
+                }
+
                 {currentFile ?
                     <div className='content'>
                         {currentFile.content()}
@@ -98,7 +114,7 @@ export default function AboutMe() {
 
                     :
 
-                    <NoFile language={language}/>
+                    <NoFile language={language} />
                 }
 
             </section>
@@ -106,7 +122,7 @@ export default function AboutMe() {
     )
 }
 
-function NoFile(props: {language: string}) {
+function NoFile(props: { language: string }) {
     return (
         <div className='no-file'>
             <img src="/assets/images/icons/code-file.svg" alt="" />
@@ -115,9 +131,10 @@ function NoFile(props: {language: string}) {
     )
 }
 
-function ContactStructure(props: {language: string}) {
+function ContactStructure(props: { language: string }) {
 
-    const [open, setOpen] = useState(true);
+    const isMobile = useIsMobile();
+    const [open, setOpen] = useState(!isMobile);
 
     return (
         <div className='contact'>

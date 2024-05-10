@@ -1,21 +1,28 @@
-@use "sass:math";
-
 .about-me {
     display: flex;
     flex-direction: row;
+    overflow: hidden !important;
+
+    >h1 {
+        display: none;
+    }
 
     .side-bar {
         max-width: 320px;
         width: 100%;
 
+        @media (max-width: 1000px) {
+            max-width: 285px;
+        }
+
         display: flex;
         flex-direction: row;
 
-        > nav {
+        >nav {
             display: flex;
             flex-direction: column;
 
-            > li {
+            >li {
                 display: flex;
                 align-items: center;
 
@@ -39,7 +46,7 @@
             }
         }
 
-        > .folder-structure {
+        >.folder-structure {
             width: 100%;
 
             display: flex;
@@ -67,7 +74,7 @@
                     user-select: none;
                 }
 
-                > div {
+                >div {
                     display: flex;
                     flex-direction: column;
                     padding-bottom: 18px;
@@ -108,8 +115,8 @@
             .contact {
                 border-top: var(--border-style);
 
-                > div {
-                    > li {
+                >div {
+                    >li {
                         cursor: default;
                         user-select: text;
                     }
@@ -120,15 +127,19 @@
 
     .open-file {
         flex-grow: 1;
+        width: fit-content;
         display: flex;
         flex-direction: column;
-        justify-content: center;
 
-        > .title {
+        >.mobile-file-name {
+            display: none;
+        }
+
+        >.title {
             display: flex;
             flex-direction: row;
 
-            > h2 {
+            >h2 {
                 padding-right: 15px;
                 font-size: 16px;
                 font-weight: 400;
@@ -171,13 +182,15 @@
             }
         }
 
-        > .content {
+        >.content {
             color: var(--light-blue);
             border-top: var(--border-style);
             padding: 18px 38px;
             counter-reset: line;
 
             height: 100%;
+            max-height: calc(100vh - 163px);
+            overflow-y: scroll;
 
             .plain-text {
                 color: #fff;
@@ -212,7 +225,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 50px;
+            margin: auto 50px;
 
             img {
                 max-width: 100px;
@@ -222,6 +235,111 @@
             h3 {
                 font-size: 16px;
                 font-weight: 500;
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .about-me {
+        padding-top: 57px;
+        flex-direction: column;
+
+        >h1 {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #FFF;
+
+            padding: 21px 27px;
+            border-top: var(--border-style);
+        }
+
+        .side-bar {
+            max-width: unset;
+
+            >nav {
+                display: none;
+            }
+
+            >.folder-structure {
+
+                >.current-folder,
+                .contact {
+                    margin-bottom: 3px;
+
+                    h1 {
+                        padding: 5px 27px;
+                        background-color: #1E2D3D;
+                    }
+
+                    >div {
+                        padding: 12px 0;
+
+                        li {
+                            padding: 6px 27px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .open-file {
+            width: 100%;
+
+            >.title {
+                display: none;
+            }
+
+            >.mobile-file-name {
+                margin-top: 38px;
+                display: inline-block;
+                padding: 0 27px;
+
+                font-size: 16px;
+                font-weight: 500;
+
+                > span {
+                    color: #fff;
+                }
+            }
+
+            >.content {
+                padding: 18px 27px;
+                overflow: unset;
+                max-height: unset;
+                border-top: unset;
+
+                .plain-text, .certificates {
+
+                    background-color: #1e2d3d96;
+                    padding: 10px;
+                    border-radius: 4px;
+
+                    h1 {
+                        font-size: 18px;
+                    }
+
+                    h2 {
+                        font-size: 16px;
+                    }
+
+                    p {
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            >.no-file {
+                img {
+                    width: 70px;
+                    height: 70px;
+                }
+
+                h3 {
+                    max-width: 260px;
+                    text-align: center;
+                }
             }
         }
     }

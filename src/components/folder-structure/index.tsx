@@ -3,12 +3,15 @@ import Section from "../../data/about-me-info/types/section.ts";
 import randomColor from 'randomcolor';
 import File from "../../data/about-me-info/types/file.tsx";
 import LanguageContext from "../../context.tsx";
+import { useIsMobile } from "../../util/mediaQueries.ts";
 
 const colors = randomColor({luminosity: 'light', count: 10});
 
-export default function FolderStructure(props: { section: Section, openFile: (file: File) => void, selectedFile: File | undefined }) {
+export default function FolderStructure(props: { section: Section, openFile: (file: File) => void, selectedFile: File | undefined, setSection: (section: Section) => void}) {
 
-    const [open, setOpen] = useState(true);
+    const isMobile = useIsMobile();
+
+    const [open, setOpen] = useState(!isMobile);
     const language = useContext(LanguageContext);
 
     return (
@@ -21,7 +24,7 @@ export default function FolderStructure(props: { section: Section, openFile: (fi
             {open &&
                 <div>
                     {props.section.files.map((file, index) =>
-                        <li onClick={() => props.openFile(file)} 
+                        <li onClick={() => {props.openFile(file); props.setSection(props.section)}} 
                             className={file.name === props.selectedFile?.name ? "selected" : ""}
                         >
                             <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ color: colors[index] }}>

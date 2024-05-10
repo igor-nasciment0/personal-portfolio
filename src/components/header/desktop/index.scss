@@ -9,14 +9,19 @@
     border: var(--border-style);
     
     > div {
+
+        width: 100%;
         max-width: 320px;
         padding: 22px 17px;
-        padding-right: 11vw;
 
         border-right: var(--border-style);
 
         position: relative;
         left: -1px;
+
+        @media (max-width: 1000px) {
+            max-width: 285px;
+        }
 
         h2 {
             font-size: 16px;

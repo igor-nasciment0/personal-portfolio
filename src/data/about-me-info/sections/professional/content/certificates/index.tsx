@@ -9,7 +9,7 @@ export default function Certificates() {
     const language = useContext(LanguageContext);
 
     return (
-        <div className="certificados">
+        <div className="certificates">
             <h1>{CertificatesContent[language].title}</h1>
             <hr />
 

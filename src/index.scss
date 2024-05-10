@@ -55,3 +55,12 @@ a {
 .go2358747891 {
   text-align: center;
 }
+
+::-webkit-scrollbar {
+  background-color: var(--dark-blue);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #607b964d;
+  height: 10px;
+}

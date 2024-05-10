@@ -2,7 +2,9 @@ import './index.scss';
 import { Project } from '../../data/projects-info/types';
 import { separateInParagraphs } from '../../util/textFunctions';
 
-import Modal from 'react-modal';
+import { Modal } from 'react-responsive-modal';
+import 'react-responsive-modal/styles.css';
+
 import React, { useContext, useEffect } from 'react';
 import LanguageContext from '../../context';
 import PopupContent from './content';
@@ -16,16 +18,13 @@ export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: React.
 
     const project = props.projectInfo;
     const language = useContext(LanguageContext);
-    const isMobile = useIsMobile();
-
-    modalStyles.content.padding = isMobile ? '10px' : '40px';
 
     return (
-        <Modal isOpen={props.isOpen} 
-               shouldCloseOnOverlayClick={true}
-               onRequestClose={() => props.setIsOpen(false)}
-               shouldFocusAfterRender 
-               style={modalStyles}
+        <Modal open={props.isOpen} 
+               onClose={() => props.setIsOpen(false)}
+               center
+               closeOnOverlayClick
+               showCloseIcon={false}
         >
             <section id="popup">
                 
@@ -75,26 +74,4 @@ export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: React.
             </section>
         </Modal>
     )
-}
-
-const modalStyles = {
-    content: {
-        border: 'none',
-        background: 'unset',
-        borderRadius: 'none',
-        padding: 'unset',
-        margin: 'auto',
-        height: 'min-content',
-        maxHeight: 'calc(100% - 20px)',
-        overFlow: 'scroll',
-        width: 'fit-content',
-        inset: 'unset',
-        backgroundColor: 'rgba(0, 0, 0, 0.3)',
-        backdropFilter: 'blur(1px)',
-    },
-    overlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.3)',
-        backdropFilter: 'blur(1px)',
-        zIndex: 5
-    }
 }

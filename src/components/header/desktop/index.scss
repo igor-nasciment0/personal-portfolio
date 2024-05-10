@@ -77,19 +77,20 @@
             }
         }
 
-        .popup-container {
+        #contact-popup-container {
             position: absolute;
             top: 100%;
             right: 0;
-            transition: 0.3s;
             padding: 10px;
         }
 
-        .popup {
+        #contact-popup {
             user-select: none;
             display: flex;
             flex-direction: column;
             padding: 20px 30px;
+            opacity: 0;
+            transition: 0.3s;
 
             background-color: var(--dark-blue);
             border: var(--border-style);

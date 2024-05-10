@@ -9,7 +9,21 @@ import copyToClipboard from '../../../util/copy';
 export default function HeaderDesktop({ currentPage, setCurrentPage }: pageProps) {
 
     const language = useContext(LanguageContext);
-    const [openPopup, setOpenPopup] = useState(false);
+
+    function handleOpenPopup() {
+        const container = document.getElementById("contact-popup-container")!;
+        const popup = document.getElementById("contact-popup")!;
+        container.style.display = 'block';
+        setTimeout(() => popup.style.opacity = "1", 100);
+    }
+
+    function handleClosePopup() {
+        const container = document.getElementById("contact-popup-container")!;
+        const popup = document.getElementById("contact-popup")!;
+        popup.style.opacity = '0';
+        setTimeout(() => container.style.display = "none", 300);
+    }
+
 
     return (
         <header className="main-header">
@@ -22,14 +36,13 @@ export default function HeaderDesktop({ currentPage, setCurrentPage }: pageProps
                 <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"about-me"} myText={HeaderContent.page_aboutme[language]} />
             </nav>
 
-            <div className='contact' onMouseLeave={() => setOpenPopup(false)}>
-                <button onMouseEnter={() => setOpenPopup(true)}>
+            <div className='contact' onMouseLeave={handleClosePopup}>
+                <button onMouseEnter={handleOpenPopup}>
                     {HeaderContent[language].contact}
                 </button>
 
-                <div className='popup-container' style={{ opacity: openPopup ? "100%" : "0%" }}>
-
-                    <div className='popup'>
+                <div id='contact-popup-container'>
+                    <div className='popup' id='contact-popup'>
                         <p>{HeaderContent[language].copy_text}</p>
 
                         <div onClick={() => copyToClipboard("nascimentoigor1311@gmail.com", HeaderContent[language].copy_mail as string)}>

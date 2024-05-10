@@ -1,2 +1,0 @@
-about-me
-    arrumar guias ao abrir todas e não haver espaço suficiente

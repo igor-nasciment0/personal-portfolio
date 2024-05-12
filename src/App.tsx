@@ -6,16 +6,18 @@ import AboutMe from './pages/about-me';
 import Projects from './pages/projects';
 import LanguageContext from './context';
 import { Toaster } from 'react-hot-toast';
+import { useIsMobile } from './util/mediaQueries';
 
 function App() {
 
+  const isMobile = useIsMobile();
   const [currentPage, setCurrentPage] = useState("home");
   const [currentLanguage, setCurrentLanguage] = useState(useContext(LanguageContext));
 
   return (
     <>
       <LanguageContext.Provider value={currentLanguage}>
-        <Toaster position='top-center'/>
+        <Toaster position={isMobile ? 'bottom-center' : 'top-center'}/>
         <Header currentPage={currentPage} setCurrentPage={setCurrentPage} setLanguage={setCurrentLanguage}/>
         <PageSwitcher currentPage={currentPage} />
         <Footer setLanguage={setCurrentLanguage} />

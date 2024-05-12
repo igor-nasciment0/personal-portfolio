@@ -6,6 +6,8 @@ import { NavigateButton, pageProps } from '../components';
 import FooterContent from '../../footer/content';
 import LanguageButton from '../../languageButton';
 import { blockPageScrolling } from '../../../util/blockScrolling';
+import Modal from 'react-responsive-modal';
+import ContactPopup from '../../contact-popup';
 
 export default function HeaderMobile({ currentPage, setCurrentPage, setLanguage }: pageProps) {
 
@@ -14,7 +16,7 @@ export default function HeaderMobile({ currentPage, setCurrentPage, setLanguage 
     useEffect(() => blockPageScrolling(menuOpen), [menuOpen])
 
     useEffect(() => {
-        setTimeout(() => setMenuOpen(false), 500);   
+        setTimeout(() => setMenuOpen(false), 500);
     }, [currentPage]);
 
     const positionY = usePageYPosition();
@@ -45,9 +47,17 @@ export default function HeaderMobile({ currentPage, setCurrentPage, setLanguage 
 function Menu({ currentPage, setCurrentPage, setLanguage }: pageProps) {
 
     const language = useContext(LanguageContext);
+    const [showContact, setShowContact] = useState(false);
 
     return (
         <section className="menu">
+            <Modal open={showContact}
+                   onClose={() => setShowContact(false)}
+                   showCloseIcon
+                >
+                <ContactPopup />
+            </Modal>
+
             <nav>
                 <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"home"} myText={HeaderContent.page_home[language]} />
                 <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"projects"} myText={HeaderContent.page_projects[language]} />
@@ -55,8 +65,11 @@ function Menu({ currentPage, setCurrentPage, setLanguage }: pageProps) {
             </nav>
 
             <footer>
+                <div className='buttons'>
+                    <button className='contact-button' onClick={() => setShowContact(true)}>{HeaderContent[language].contact}</button>
+                    <LanguageButton setLanguage={setLanguage!} />
+                </div>
 
-                <LanguageButton setLanguage={setLanguage!} />
 
                 <div className='find-me'>
                     <p>{FooterContent[language].p_social_links}</p>

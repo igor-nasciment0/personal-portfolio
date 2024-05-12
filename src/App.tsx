@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Header from './components/header'
 import Footer from './components/footer';
 import Home from './pages/home';
@@ -7,39 +7,47 @@ import Projects from './pages/projects';
 import LanguageContext from './context';
 import { Toaster } from 'react-hot-toast';
 import { useIsMobile } from './util/mediaQueries';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 
 function App() {
 
-  const isMobile = useIsMobile();
-  const [currentPage, setCurrentPage] = useState("home");
-  const [currentLanguage, setCurrentLanguage] = useState(useContext(LanguageContext));
+    const isMobile = useIsMobile();
 
-  return (
-    <>
-      <LanguageContext.Provider value={currentLanguage}>
-        <Toaster position={isMobile ? 'bottom-center' : 'top-center'}/>
-        <Header currentPage={currentPage} setCurrentPage={setCurrentPage} setLanguage={setCurrentLanguage}/>
-        <PageSwitcher currentPage={currentPage} />
-        <Footer setLanguage={setCurrentLanguage} />
-      </LanguageContext.Provider>
-    </>
-  )
+    const [currentPage, setCurrentPage] = useState("home");
+    const [currentLanguage, setCurrentLanguage] = useState(useContext(LanguageContext));
+
+    return (
+        <>
+            <LanguageContext.Provider value={currentLanguage}>
+                <Toaster position={isMobile ? 'bottom-center' : 'top-center'} />
+                <Header currentPage={currentPage} setCurrentPage={setCurrentPage} setLanguage={setCurrentLanguage} />
+
+                <BrowserRouter>
+                    <MyRoutes currentPage={currentPage} />
+                </BrowserRouter>
+
+                <Footer setLanguage={setCurrentLanguage} />
+            </LanguageContext.Provider>
+        </>
+    )
 }
 
-function PageSwitcher(props: { currentPage: string }) {
-  switch (props.currentPage) {
-    case "home":
-      return <Home />
+function MyRoutes(props: { currentPage: string }) {
 
-    case "projects":
-      return <Projects />
+    const navigate = useNavigate();
 
-    case "about-me":
-      return <AboutMe />
+    useEffect(() => {
+        navigate(props.currentPage);
+    }, [props.currentPage]);
 
-    default:
-      return <Home />
-  }
+    return (
+        <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/projects' element={<Projects />} />
+            <Route path='/about-me' element={<AboutMe />} />
+            <Route path='/*' element={<Home />} />
+        </Routes>
+    )
 }
 
 export default App;

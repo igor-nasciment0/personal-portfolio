@@ -7,7 +7,7 @@ import Projects from './pages/projects';
 import LanguageContext from './context';
 import { Toaster } from 'react-hot-toast';
 import { useIsMobile } from './util/mediaQueries';
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
                 <Header currentPage={currentPage} setCurrentPage={setCurrentPage} setLanguage={setCurrentLanguage} />
 
                 <BrowserRouter>
-                    <MyRoutes currentPage={currentPage} />
+                    <MyRoutes currentPage={currentPage} setCurrentPage={setCurrentPage}/>
                 </BrowserRouter>
 
                 <Footer setLanguage={setCurrentLanguage} />
@@ -32,9 +32,14 @@ function App() {
     )
 }
 
-function MyRoutes(props: { currentPage: string }) {
+function MyRoutes(props: { currentPage: string, setCurrentPage: (page: string) => void }) {
 
     const navigate = useNavigate();
+    const path = useLocation().pathname.replace('/', '');
+
+    useEffect(() => {
+        props.setCurrentPage(path);
+    }, [path])
 
     useEffect(() => {
         navigate(props.currentPage);

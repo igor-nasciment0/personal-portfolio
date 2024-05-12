@@ -51,11 +51,18 @@
 
 .react-responsive-modal-modal {
     #contact-popup-container {
+        width: 100vw;
         position: static;
     }
 
     #contact-popup {
+        padding: 16px 16px;
+        width: 100%;
         opacity: 1;
+
+        div {
+            gap: 12px;
+        }
     }
 
     .react-responsive-modal-closeButton {

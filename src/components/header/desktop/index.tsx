@@ -1,9 +1,8 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import './index.scss';
 import LanguageContext from '../../../context';
 import HeaderContent from '../content';
 import { NavigateButton, pageProps } from '../components';
-import copyToClipboard from '../../../util/copy';
 import ContactPopup from '../../contact-popup';
 
 

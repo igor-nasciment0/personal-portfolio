@@ -12,8 +12,9 @@ import LanguageContext from '../../context';
 import ProjectsContent from './content';
 import { useIsMobile } from '../../util/mediaQueries';
 import HTMLReactParser from 'html-react-parser/lib/index';
+import BasePage from '../base';
 
-export default function Projects() {
+export default function Projects(props: { setCurrentLanguage: React.Dispatch<React.SetStateAction<string>> }) {
 
     const isMobile = useIsMobile();
 
@@ -37,7 +38,7 @@ export default function Projects() {
             let projectFitsFilter = false;
 
             for (const tech of techFilters)
-                if(project.techs.some(projectTech => projectTech.name === tech)) 
+                if (project.techs.some(projectTech => projectTech.name === tech))
                     projectFitsFilter = true;
 
             return projectFitsFilter;
@@ -54,70 +55,73 @@ export default function Projects() {
     useEffect(filter, [techFilters]);
 
     return (
-        <main className='page projects' >
+        <BasePage selectedPage='projects' setCurrentLanguage={props.setCurrentLanguage}>
+            <main className='page projects' >
 
-            <h1>_{ProjectsContent[language].page_title}</h1>
+                <h1>_{ProjectsContent[language].page_title}</h1>
 
-            <section className="side-bar">
-                <h1 onClick={() => setShowFilters(!showFilters)}>
-                    <img src="/assets/images/icons/arrow-down.svg" style={!showFilters ? { rotate: "-90deg" } : {}} alt="" />
-                    {ProjectsContent[language].filters_title}
-                </h1>
+                <section className="side-bar">
+                    <h1 onClick={() => setShowFilters(!showFilters)}>
+                        <img src="/assets/images/icons/arrow-down.svg" style={!showFilters ? { rotate: "-90deg" } : {}} alt="" />
+                        {ProjectsContent[language].filters_title}
+                    </h1>
 
-                {showFilters &&
-                    <div className='categories'>
-                        {techs.map(tech =>
-                            <div onClick={() => handleUpdateFilter(tech.name)}>
-                                <CustomCheckbox value={tech.name} checked={techFilters.some(techFilter => techFilter === tech.name)} />
-                                <img src={tech.logoURL} alt="" />
-                                <h2>{tech.name}</h2>
+                    {showFilters &&
+                        <div className='categories'>
+                            {techs.map(tech =>
+                                <div onClick={() => handleUpdateFilter(tech.name)}>
+                                    <CustomCheckbox value={tech.name} checked={techFilters.some(techFilter => techFilter === tech.name)} />
+                                    <img src={tech.logoURL} alt="" />
+                                    <h2>{tech.name}</h2>
+                                </div>
+                            )}
+                        </div>
+                    }
+                </section>
+
+                <section className='sec-projects'>
+                    <div className='title'>
+                        <h2>
+                            <img src="/assets/images/icons/arrow-next.svg" alt="" />
+                            {techFilters.length === 0 ?
+                                ProjectsContent[language].all_projects_title :
+                                techFilters.map(tech => tech.toLowerCase() + '; ')
+                            }
+                        </h2>
+                    </div>
+
+                    <div className='container-projects'>
+                        {projects.map(project =>
+                            <div className='project'>
+                                <h3>
+                                    {project.name + " "}
+                                    <span>// {project.codeName}</span>
+                                </h3>
+
+                                <div>
+                                    <ul className='techs'>
+                                        {project.techs.map(tech =>
+                                            <li style={{ background: tech.color }}>
+                                                <img src={tech.logoURL} alt="" />
+                                            </li>
+                                        )}
+                                    </ul>
+
+                                    <img src={"/assets/images/projects/" + project.coverImage} className='background-image' />
+
+                                    <div className='description'>
+                                        <p>{HTMLReactParser(limitText(project.description[language]))}</p>
+
+                                        <button onClick={() => { setShowProjectInfo(true); setProjectInfo(project) }}>{ProjectsContent[language].project_button}</button>
+                                        <ProjectPopUp isOpen={showProjectInfo} setIsOpen={setShowProjectInfo} projectInfo={projectInfo} />
+                                    </div>
+                                </div>
                             </div>
                         )}
                     </div>
-                }
-            </section>
+                </section>
+            </main>
+        </BasePage>
 
-            <section className='sec-projects'>
-                <div className='title'>
-                    <h2>
-                        <img src="/assets/images/icons/arrow-next.svg" alt="" />
-                        {techFilters.length === 0 ?
-                            ProjectsContent[language].all_projects_title :
-                            techFilters.map(tech => tech.toLowerCase() + '; ')
-                        }
-                    </h2>
-                </div>
-
-                <div className='container-projects'>
-                    {projects.map(project =>
-                        <div className='project'>
-                            <h3>
-                                {project.name + " "}
-                                <span>// {project.codeName}</span>
-                            </h3>
-
-                            <div>
-                                <ul className='techs'>
-                                    {project.techs.map(tech =>
-                                        <li style={{ background: tech.color }}>
-                                            <img src={tech.logoURL} alt="" />
-                                        </li>
-                                    )}
-                                </ul>
-
-                                <img src={"/assets/images/projects/" + project.coverImage} className='background-image' />
-
-                                <div className='description'>
-                                    <p>{HTMLReactParser(limitText(project.description[language]))}</p>
-
-                                    <button onClick={() => { setShowProjectInfo(true); setProjectInfo(project)}}>{ProjectsContent[language].project_button  }</button>
-                                    <ProjectPopUp isOpen={showProjectInfo} setIsOpen={setShowProjectInfo} projectInfo={projectInfo} />
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </section>
-        </main>
     )
 }

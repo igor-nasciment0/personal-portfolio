@@ -5,8 +5,7 @@ import HeaderContent from '../content';
 import { NavigateButton, pageProps } from '../components';
 import ContactPopup from '../../contact-popup';
 
-
-export default function HeaderDesktop({ currentPage, setCurrentPage }: pageProps) {
+export default function HeaderDesktop({ currentPage }: pageProps) {
 
     const language = useContext(LanguageContext);
 
@@ -24,16 +23,15 @@ export default function HeaderDesktop({ currentPage, setCurrentPage }: pageProps
         setTimeout(() => container.style.display = "none", 300);
     }
 
-
     return (
         <header className="main-header">
             <div>
                 <h2>igor-nascimento</h2>
             </div>
             <nav>
-                <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"home"} myText={HeaderContent.page_home[language]} />
-                <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"projects"} myText={HeaderContent.page_projects[language]} />
-                <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"about-me"} myText={HeaderContent.page_aboutme[language]} />
+                <NavigateButton currentPage={currentPage} myPage={"home"} myText={HeaderContent.page_home[language]} />
+                <NavigateButton currentPage={currentPage} myPage={"projects"} myText={HeaderContent.page_projects[language]} />
+                <NavigateButton currentPage={currentPage} myPage={"about-me"} myText={HeaderContent.page_aboutme[language]} />
             </nav>
 
             <div className='contact' onMouseLeave={handleClosePopup}>

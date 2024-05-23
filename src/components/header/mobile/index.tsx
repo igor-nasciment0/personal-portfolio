@@ -9,7 +9,7 @@ import { blockPageScrolling } from '../../../util/blockScrolling';
 import Modal from 'react-responsive-modal';
 import ContactPopup from '../../contact-popup';
 
-export default function HeaderMobile({ currentPage, setCurrentPage, setLanguage }: pageProps) {
+export default function HeaderMobile({ currentPage, setLanguage }: pageProps) {
 
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -38,13 +38,13 @@ export default function HeaderMobile({ currentPage, setCurrentPage, setLanguage 
             </div>
 
             {menuOpen &&
-                <Menu currentPage={currentPage} setCurrentPage={setCurrentPage} setLanguage={setLanguage} />
+                <Menu currentPage={currentPage} setLanguage={setLanguage} />
             }
         </header>
     )
 }
 
-function Menu({ currentPage, setCurrentPage, setLanguage }: pageProps) {
+function Menu({ currentPage, setLanguage }: pageProps) {
 
     const language = useContext(LanguageContext);
     const [showContact, setShowContact] = useState(false);
@@ -59,9 +59,9 @@ function Menu({ currentPage, setCurrentPage, setLanguage }: pageProps) {
             </Modal>
 
             <nav>
-                <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"home"} myText={HeaderContent.page_home[language]} />
-                <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"projects"} myText={HeaderContent.page_projects[language]} />
-                <NavigateButton currentPage={currentPage} setCurrentPage={setCurrentPage} myPage={"about-me"} myText={HeaderContent.page_aboutme[language]} />
+                <NavigateButton currentPage={currentPage} myPage={"home"} myText={HeaderContent.page_home[language]} />
+                <NavigateButton currentPage={currentPage} myPage={"projects"} myText={HeaderContent.page_projects[language]} />
+                <NavigateButton currentPage={currentPage} myPage={"about-me"} myText={HeaderContent.page_aboutme[language]} />
             </nav>
 
             <footer>

@@ -8,11 +8,12 @@ import randomColor from 'randomcolor';
 import LanguageContext from '../../context.tsx';
 import AboutMeContent from './content.ts';
 import { useIsMobile } from '../../util/mediaQueries.ts';
+import BasePage from '../base/index.tsx';
 
 const fileHistory = new FileHistory();
 const negriteTextColors = randomColor({ luminosity: "light", count: 25 })
 
-export default function AboutMe() {
+export default function AboutMe(props: {setCurrentLanguage: React.Dispatch<React.SetStateAction<string>>}) {
 
     const isMobile = useIsMobile();
 
@@ -62,63 +63,65 @@ export default function AboutMe() {
     useEffect(randomColorsInNegriteText, [currentFile]);
 
     return (
-        <main className='page about-me'>
+        <BasePage selectedPage='about-me' setCurrentLanguage={props.setCurrentLanguage}>
+            <main className='page about-me'>
 
-            <h1>_{AboutMeContent[language].page_title}</h1>
+                <h1>_{AboutMeContent[language].page_title}</h1>
 
-            <section className='side-bar'>
-                <nav>
-                    {aboutMeData.map(section =>
-                        <li onClick={() => setSelectedSection(section)}
-                            className={selectedSection.name === section.name ? "selected" : ""}
-                        >
-                            <img src={"/assets/images/icons/" + section.icon} alt="" />
-                        </li>
-                    )}
-                </nav>
-                <div className='folder-structure'>
+                <section className='side-bar'>
+                    <nav>
+                        {aboutMeData.map(section =>
+                            <li onClick={() => setSelectedSection(section)}
+                                className={selectedSection.name === section.name ? "selected" : ""}
+                            >
+                                <img src={"/assets/images/icons/" + section.icon} alt="" />
+                            </li>
+                        )}
+                    </nav>
+                    <div className='folder-structure'>
 
-                    {isMobile ? aboutMeData.map(section =>
-                        <FolderStructure section={section} openFile={openFile} selectedFile={currentFile} setSection={setSelectedSection}/>
-                    ) :
-                        <FolderStructure section={selectedSection} openFile={openFile} selectedFile={currentFile} setSection={setSelectedSection}/>
-                    }
+                        {isMobile ? aboutMeData.map(section =>
+                            <FolderStructure section={section} openFile={openFile} selectedFile={currentFile} setSection={setSelectedSection} />
+                        ) :
+                            <FolderStructure section={selectedSection} openFile={openFile} selectedFile={currentFile} setSection={setSelectedSection} />
+                        }
 
-                    <ContactStructure language={language} />
+                        <ContactStructure language={language} />
 
-                </div>
-            </section>
+                    </div>
+                </section>
 
-            <section className='open-file'>
-                <div className='title' style={!openFiles.length ? { borderBottom: "none" } : {}}>
-                    {
-                        openFiles.map(file =>
-                            <h2 className={file.name === currentFile?.name ? 'selected' : ''}>
-                                <span onClick={() => accessFileContent(file)}>{file.name[language]}</span>
-                                <img src="/assets/images/icons/close-icon.svg" alt="" onClick={() => closeFile(file)} />
-                            </h2>
-                        )
-                    }
-                </div>
-
-                {currentFile &&
-                    <h1 className='mobile-file-name'>
-                        <span>// {selectedSection.name[language]}</span> / {currentFile?.name[language]}
-                    </h1>
-                }
-
-                {currentFile ?
-                    <div className='content'>
-                        {currentFile.content()}
+                <section className='open-file'>
+                    <div className='title' style={!openFiles.length ? { borderBottom: "none" } : {}}>
+                        {
+                            openFiles.map(file =>
+                                <h2 className={file.name === currentFile?.name ? 'selected' : ''}>
+                                    <span onClick={() => accessFileContent(file)}>{file.name[language]}</span>
+                                    <img src="/assets/images/icons/close-icon.svg" alt="" onClick={() => closeFile(file)} />
+                                </h2>
+                            )
+                        }
                     </div>
 
-                    :
+                    {currentFile &&
+                        <h1 className='mobile-file-name'>
+                            <span>// {selectedSection.name[language]}</span> / {currentFile?.name[language]}
+                        </h1>
+                    }
 
-                    <NoFile language={language} />
-                }
+                    {currentFile ?
+                        <div className='content'>
+                            {currentFile.content()}
+                        </div>
 
-            </section>
-        </main>
+                        :
+
+                        <NoFile language={language} />
+                    }
+
+                </section>
+            </main>
+        </BasePage>
     )
 }
 

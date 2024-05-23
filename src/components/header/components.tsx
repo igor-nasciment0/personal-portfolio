@@ -1,15 +1,19 @@
-export function NavigateButton({ currentPage, setCurrentPage, myPage, myText }: buttonProps) {
+import { useNavigate } from "react-router-dom"
+
+export function NavigateButton({ currentPage, myPage, myText }: buttonProps) {
+  
+  const navigate = useNavigate();
+  
   return (
     <li
       className={currentPage === myPage ? "selected" : ""}
-      onClick={() => setCurrentPage(myPage)}
+      onClick={() => navigate("/" + myPage)}
     >{myText}</li>
   )
 }
 
 export interface pageProps {
   currentPage: string,
-  setCurrentPage: React.Dispatch<React.SetStateAction<string>>
   setLanguage?: React.Dispatch<React.SetStateAction<string>>
 }
 

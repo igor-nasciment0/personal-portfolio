@@ -5,6 +5,7 @@
     padding: 10px;
 
     color: var(--light-blue);
+    width: max-content;
 }
 
 #contact-popup {
@@ -51,7 +52,6 @@
 
 .react-responsive-modal-modal {
     #contact-popup-container {
-        width: 100vw;
         position: static;
     }
 

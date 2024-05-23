@@ -24,6 +24,7 @@ export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: React.
             center
             closeOnOverlayClick
             showCloseIcon={false}
+            animationDuration={50}
         >
             <section id="popup">
 

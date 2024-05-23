@@ -1,7 +1,5 @@
 import Header from '../../components/header'
 import Footer from '../../components/footer';
-import { useContext, useState } from 'react';
-import LanguageContext from '../../context';
 import { useIsMobile } from '../../util/mediaQueries';
 import { Toaster } from 'react-hot-toast';
 
@@ -12,14 +10,13 @@ export default function BasePage(props: {
 }
 ) {
     const isMobile = useIsMobile();
-    const setCurrentLanguage = useState(useContext(LanguageContext))[1];
-
+    
     return (
         <>
             <Toaster position={isMobile ? 'bottom-center' : 'top-center'} />
-            <Header currentPage={props.selectedPage} setLanguage={setCurrentLanguage} />
+            <Header currentPage={props.selectedPage} setLanguage={props.setCurrentLanguage} />
             {props.children}
-            <Footer setLanguage={setCurrentLanguage} />
+            <Footer setLanguage={props.setCurrentLanguage} />
         </>
     )
 }

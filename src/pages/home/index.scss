@@ -130,6 +130,7 @@
         img {
             border-radius: 10000px;
             box-shadow: 0 0 10px 4px rgba($color: #ffffff, $alpha: 0.2);
+            
             width: clamp(350px, 30vw, 400px);
 
             @media(max-width: 500px) {

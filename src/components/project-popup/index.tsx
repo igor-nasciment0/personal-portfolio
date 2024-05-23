@@ -19,14 +19,14 @@ export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: React.
     const language = useContext(LanguageContext);
 
     return (
-        <Modal open={props.isOpen} 
-               onClose={() => props.setIsOpen(false)}
-               center
-               closeOnOverlayClick
-               showCloseIcon={false}
+        <Modal open={props.isOpen}
+            onClose={() => props.setIsOpen(false)}
+            center
+            closeOnOverlayClick
+            showCloseIcon={false}
         >
             <section id="popup">
-                
+
                 <div className='cover-image' style={{ backgroundImage: "url('/assets/images/projects/" + project.coverImage + "')" }}>
                     <button onClick={() => props.setIsOpen(false)}>
                         <img src="/assets/images/icons/close-icon.svg" alt="" />
@@ -64,10 +64,12 @@ export default function ProjectPopUp(props: { isOpen: boolean, setIsOpen: React.
                             <h3 className='unfinished'>{PopupContent[language].unfinished_message}</h3>
                         }
 
-                        <a href={project.repositoryURL} target='_blank' className='github'>
-                            <img src="/assets/images/icons/github.svg" alt="" />
-                            {PopupContent[language].github_link}
-                        </a>
+                        {project.repositoryURL &&
+                            <a href={project.repositoryURL} target='_blank' className='github'>
+                                <img src="/assets/images/icons/github.svg" alt="" />
+                                {PopupContent[language].github_link}
+                            </a>
+                        }
                     </div>
                 </div>
             </section>

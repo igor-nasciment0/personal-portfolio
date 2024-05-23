@@ -16,24 +16,22 @@ export default function Home() {
                     <div>
                         <p>{HomeContent[language].p_saudation}</p>
                         <h1>Igor Nascimento</h1>
-                        <h2>&gt; Full-Stack Developer</h2>
+                        <h2>&gt; Web Developer</h2>
                     </div>
 
                     <div>
                         <p className='comment'>// {HomeContent[language].p_github}</p>
                         <p className='variable'>
-                            <a href="https://github.com/igor-nasciment0" target='_blank'>
-                                <span className='const'>const</span>
-                                <span className='name'>githubLink</span>
-                                <span>=</span>
-                                <span className='value'>"https://<wbr />github<wbr />.com<wbr />/igor<wbr />-nasciment0"</span>
-                            </a>
+                            <span className='const'>const</span>
+                            <span className='name'>githubLink</span>
+                            <span>=</span>
+                            <span className='value'><a href="https://github.com/igor-nasciment0" target='_blank'>"https://github.com/igor-nasciment0"</a></span>
                         </p>
                     </div>
                 </section>
 
                 <div className='photo'>
-                    <img src="/assets/images/igorPhoto.jfif" alt="" />
+                    <img src="/assets/images/igor.jpg" alt="" />
                 </div>
             </div>
         </main>

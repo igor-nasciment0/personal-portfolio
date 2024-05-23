@@ -41,7 +41,6 @@ export default function AboutMe(props: {setCurrentLanguage: React.Dispatch<React
 
         if (file === currentFile) {
             fileHistory.popFromHistory();
-            console.log(fileHistory);
             !newOpenFiles.length ? setCurrentFile(undefined) : setCurrentFile(fileHistory.getLastFile());
 
         } else fileHistory.removeFromHistory(file);

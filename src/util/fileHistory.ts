@@ -9,6 +9,7 @@ export default class FileHistory {
     }
 
     public addToHistory(file: File) {
+        this.removeFromHistory(file)
         this.history.push(file);
     }
 

@@ -47,5 +47,13 @@ export const certificates: certificate[] = [
         },
         imgPath: "alura.jpg",
         filePath: "alura.pdf"
+    },
+    {
+        name: {
+            pt_br: "Obmep 2021: Medalha de Bronze",
+            en_us: "Obmep 2021: Bronze Medal"
+        },
+        imgPath: "obmep21.png",
+        filePath: "obmep21.pdf"
     }
 ]

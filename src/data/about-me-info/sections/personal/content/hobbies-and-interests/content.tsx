@@ -9,7 +9,7 @@ const HobbiesContent: LanguageContent = {
         hobbie3: <p>Além disso, <b>videogames</b> sempre foram um bom passatempo, tendo servido também como minha porta de entrada pessoal para o mundo da tecnologia. 🎮</p>,
 
         interests_subtitle: "Interesses",
-        interest: <p>O meu maior sonho não profissional é, um dia, <b>tornar-me um excelente pianista</b>. 🎹</p>
+        interest: <p>O meu maior sonho não profissional é, um dia, <b>tornar-me pianista</b>. 🎹</p>
     },
 
     en_us: {
@@ -20,7 +20,7 @@ const HobbiesContent: LanguageContent = {
         hobbie3: <p>Furthermore, <b>video games</b> have always been a good hobby, and it also served as my personal gateway to the world of technology. 🎮</p>,
 
         interests_subtitle: "Interests",
-        interest: <p>My greatest non-professional dream is to, one day, <b>become an excellent pianist</b>. 🎹</p>
+        interest: <p>My greatest non-professional dream is to, one day, <b>become a pianist</b>. 🎹</p>
     },
 }
 

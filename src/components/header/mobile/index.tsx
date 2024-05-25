@@ -73,10 +73,10 @@ function Menu({ currentPage, setLanguage }: pageProps) {
 
                 <div className='find-me'>
                     <p>{FooterContent[language].p_social_links}</p>
-                    <a href="" target='_blank'>
+                    <a href="https://www.linkedin.com/in/nascimentoigor1/" target='_blank'>
                         <img src="/assets/images/icons/linkedin.svg" alt="" />
                     </a>
-                    <a href="" target='_blank'>
+                    <a href="https://github.com/igor-nasciment0" target='_blank'>
                         <img src="/assets/images/icons/github.svg" alt="" />
                     </a>
                 </div>

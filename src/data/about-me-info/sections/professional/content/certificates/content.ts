@@ -12,7 +12,7 @@ const CertificatesContent: LanguageContent = {
 export default CertificatesContent;
 
 
-interface certificate {
+interface Certificate {
     name: {
         pt_br: string,
         en_us: string
@@ -22,7 +22,7 @@ interface certificate {
     filePath: string
 }
 
-export const certificates: certificate[] = [
+export const certificates: Certificate[] = [
     {
         name: {
             pt_br: "Udemy: Estruturas de Dados e Algoritmos",
@@ -50,10 +50,18 @@ export const certificates: certificate[] = [
     },
     {
         name: {
-            pt_br: "Obmep 2021: Medalha de Bronze",
-            en_us: "Obmep 2021: Bronze Medal"
+            pt_br: "OBMEP 2021: Medalha de Bronze",
+            en_us: "OBMEP 2021: Bronze Medal"
         },
         imgPath: "obmep21.png",
         filePath: "obmep21.pdf"
+    },
+    {
+        name: {
+            pt_br: "OBMEP 2023: Medalha de Bronze",
+            en_us: "OBMEP 2023: Bronze Medal"
+        },
+        imgPath: "obmep23.png",
+        filePath: "obmep23.pdf"
     }
 ]

@@ -61,7 +61,7 @@ export const certificates: Certificate[] = [
             pt_br: "OBMEP 2023: Medalha de Bronze",
             en_us: "OBMEP 2023: Bronze Medal"
         },
-        imgPath: "obmep23.png",
+        imgPath: "obmep23.jpg",
         filePath: "obmep23.pdf"
     }
 ]

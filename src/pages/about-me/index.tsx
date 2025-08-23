@@ -149,7 +149,7 @@ function ContactStructure(props: { language: string }) {
                 <div>
                     <li style={{ wordBreak: "break-word" }}>
                         <img src="/assets/images/icons/mail.svg" alt="" />
-                        nascimentoigor@gmail.com
+                        nascimentoigor1311@gmail.com
                     </li>
                     <li>
                         <img src="/assets/images/icons/whatsapp.svg" alt="" />

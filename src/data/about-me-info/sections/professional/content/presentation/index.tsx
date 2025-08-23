@@ -13,9 +13,7 @@ export default function Presentation() {
             <p>{PresentationContent[language].p1}</p>
 
             <p>
-                {PresentationContent[language].p2_part1}
-                <strong>{PresentationContent[language].p2_highlight}</strong>
-                {PresentationContent[language].p2_part2}
+                {PresentationContent[language].p2}
             </p>
 
             <p>{PresentationContent[language].p3}</p>

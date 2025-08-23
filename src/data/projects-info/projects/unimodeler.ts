@@ -9,6 +9,7 @@ const UniModelerProject: Project = {
         en_us: "UniModeler is a database modeler, focused on modeling for MongoDB. \n In it, each Collection is defined in the text editor as a JavaScript object. The properties of this object will be considered as the properties of the Document that this Collection will receive. Through the text editor, it is possible to add sub-documents, create references between Collections by defining primary and foreign keys, etc. \n To develop this application, I employed knowledge acquired in AST (to read the collections defined in the text editor) and in the ReactFlow library (to create the visual layout of the collections)."
     },
     coverImage: "unimodeler.png",
+    siteURL: "https://unimodeler.dev",
     techs: [
         Tech.REACT,
         Tech.MONGODB,

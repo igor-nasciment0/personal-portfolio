@@ -18,7 +18,17 @@ export default function Home(props: { setCurrentLanguage: React.Dispatch<React.S
                         <div>
                             <p>{HomeContent[language].p_saudation}</p>
                             <h1>Igor Nascimento</h1>
-                            <h2>&gt; {HomeContent[language].title}</h2>
+                            <table>
+                                <tr className='title1'>
+                                    <td>&gt;</td>
+                                    <td>{HomeContent[language].title1}</td>
+                                </tr>
+
+                                <tr className='title2'>
+                                    <td>&gt;</td>
+                                    <td>{HomeContent[language].title2}</td>
+                                </tr>
+                            </table>
                         </div>
 
                         <div>
